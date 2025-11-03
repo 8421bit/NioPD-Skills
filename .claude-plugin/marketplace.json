@@ -1,0 +1,35 @@
+{
+  "name": "niopd-marketplace",
+  "owner": {
+    "name": "NioPD Team",
+    "email": "[email protected]",
+    "url": "https://github.com/iflow-ai/niopd"
+  },
+  "metadata": {
+    "description": "A marketplace for NioPD plugins - Product management toolkits for Claude Code",
+    "version": "1.0.0",
+    "homepage": "https://github.com/iflow-ai/niopd",
+    "pluginRoot": "./commands"
+  },
+  "plugins": [
+    {
+      "name": "0niopd",
+      "source": "./niopd/",
+      "description": "NioPD (Nio Product Development) - A comprehensive product management toolkit for Claude Code that helps product managers discover, define, and deliver great products through AI-powered workflows.",
+      "version": "1.0.0",
+      "category": "productivity",
+      "keywords": [
+        "product-management",
+        "ai",
+        "product-development",
+        "pm-tools",
+        "requirements",
+        "roadmap"
+      ],
+      "author": {
+        "name": "NioPD Team",
+        "email": "[email protected]"
+      }
+    }
+  ]
+}
