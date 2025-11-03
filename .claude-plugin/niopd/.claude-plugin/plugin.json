@@ -11,5 +11,5 @@
   "repository": "https://github.com/iflow-ai/niopd",
   "license": "MIT",
   "keywords": ["product-management", "ai", "product-development", "pm-tools", "requirements", "roadmap"],
-  "commands": ["./commands/niopd"]
+  "commands": ["./commands/"]
 }

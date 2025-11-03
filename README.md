@@ -34,7 +34,7 @@
 
 ## 🎯 什么是 NioPD？
 
-**NioPD (Nio Product Director)** 是一个为 Claude Code 设计的产品管理全生命周期解决方案，集成了69个智能化指令，覆盖从商业战略规划到产品交付运营的完整流程。
+**NioPD (Nio Product Director)** 是一个为 Claude Code 设计的产品管理工具包，集成了69个智能化指令，覆盖从商业战略规划到产品交付运营的完整流程。
 
 ### 🌟 不仅仅是工具，更是您的 AI 产品管理伙伴
 
