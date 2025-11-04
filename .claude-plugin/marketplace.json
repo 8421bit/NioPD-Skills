@@ -1,33 +1,46 @@
 {
-  "name": "niows-marketplace",
+  "name": "niopd-marketplace",
   "owner": {
-    "name": "NioPD Team",
-    "email": "[email protected]",
-    "url": "https://github.com/iflow-ai/niopd"
+    "name": "8421bit",
+    "url": "https://github.com/8421bit"
   },
   "metadata": {
     "description": "A marketplace for NioPD plugins - Product management toolkits for Claude Code",
     "version": "1.0.0",
-    "homepage": "https://github.com/iflow-ai/niopd",
-    "pluginRoot": "./commands"
+    "homepage": "https://github.com/iflow-ai/niopd"
   },
   "plugins": [
     {
       "name": "0niopd",
-      "source": "./niopd/",
+      "source": "./plugins/niopd/",
       "description": "NioPD (Nio Product Development) - A comprehensive product management toolkit for Claude Code that helps product managers discover, define, and deliver great products through AI-powered workflows.",
       "version": "1.0.0",
       "category": "productivity",
       "keywords": [
         "product-management",
-        "ai",
         "product-development",
         "pm-tools",
-        "requirements",
-        "roadmap"
+        "requirements"
       ],
       "author": {
-        "name": "NioPD Team",
+        "name": "8421bit",
+        "email": "[email protected]"
+      }
+    },
+    {
+      "name": "output-style-niopd",
+      "source": "./plugins/output-style-niopd/",
+      "description": "NioPD Output Style - Provides context and persona for the NioPD product management assistant through SessionStart hook",
+      "version": "1.0.0",
+      "category": "productivity",
+      "keywords": [
+        "output-style",
+        "product-management",
+        "niopd",
+        "context"
+      ],
+      "author": {
+        "name": "8421bit",
         "email": "[email protected]"
       }
     }
