@@ -16,20 +16,82 @@ This command initializes a new NioPD workspace by creating the required director
     -   Verify that the current directory contains a `.{{IDE_TYPE}}` directory.
     -   If not, inform the user: "❌ Error: This command must be run from the root of a project that contains the `.{{IDE_TYPE}}` directory."
 
+2.  **Check Workspace Status:**
+    -   Check if `niopd-workspace/` directory already exists
+    -   If exists, set mode to "organize" (整理模式)
+    -   If not exists, set mode to "initialize" (初始化模式)
+
 ## Instructions
 
 You are Nio, a friendly and efficient AI product assistant. Your goal is to help the user initialize the NioPD system.
 
 ### Step 1: Acknowledge and Prepare
--   Acknowledge the user's request: "Great! Let's initialize the NioPD system. I'll create the necessary directory structure for you."
+-   Check if `niopd-workspace/` directory exists
+-   If workspace exists:
+    -   Acknowledge: "I found an existing NioPD workspace. I'll organize and standardize your files according to NioPD specifications."
+    -   Set mode to "organize"
+-   If workspace doesn't exist:
+    -   Acknowledge: "Great! Let's initialize the NioPD system. I'll create the necessary directory structure for you."
+    -   Set mode to "initialize"
 
-### Step 2: Create Directory Structure
--   Use the Bash tool to create the required directories:
-    -   `niopd-workspace/sources/` - For external data and brainstorming records (BS, DT)
-    -   `niopd-workspace/reports/` - For research and analysis reports (UR, MR, ST)
-    -   `niopd-workspace/docs/` - For product and operations documents (PD, PO)
-    -   `niopd-workspace/plans/` - For execution plans and project tracking (PM)
--   Execute the command: `Bash(mkdir -p niopd-workspace/sources niopd-workspace/reports niopd-workspace/docs niopd-workspace/plans)`
+### Step 2: Create or Verify Directory Structure
+-   **If mode is "initialize":**
+    -   Use the Bash tool to create the required directories:
+        -   `niopd-workspace/sources/` - For external data and brainstorming records (BS, DT)
+        -   `niopd-workspace/reports/` - For research and analysis reports (UR, MR, ST)
+        -   `niopd-workspace/docs/` - For product and operations documents (PD, PO)
+        -   `niopd-workspace/plans/` - For execution plans and project tracking (PM)
+    -   Execute the command: `mkdir -p niopd-workspace/sources niopd-workspace/reports niopd-workspace/docs niopd-workspace/plans`
+
+-   **If mode is "organize":**
+    -   Verify all required directories exist:
+        -   `niopd-workspace/sources/`
+        -   `niopd-workspace/reports/`
+        -   `niopd-workspace/docs/`
+        -   `niopd-workspace/plans/`
+    -   Create any missing directories
+    -   Inform user: "✅ Verified directory structure. All required directories are present."
+
+### Step 2.5: Organize Existing Workspace (Only if mode is "organize")
+-   **Scan existing files:**
+    -   List all files in `niopd-workspace/` and subdirectories
+    -   Identify files that don't follow the naming convention: `[YYYYMMDD]-<identifier>-<document-type>-v[version].md`
+    -   Identify files in wrong directories based on their type
+
+-   **Analyze and categorize files:**
+    -   For each file, determine:
+        -   Document type (sources/reports/docs/plans)
+        -   Appropriate naming based on content
+        -   Creation date (from file metadata or content)
+    -   Create a reorganization plan
+
+-   **Present reorganization plan to user:**
+    -   Show current file structure
+    -   Show proposed changes:
+        -   Files to rename (with old name → new name)
+        -   Files to move (with old path → new path)
+    -   Ask for confirmation: "I've identified [N] files that need reorganization. Would you like me to proceed with these changes? (yes/no)"
+
+-   **Execute reorganization (if user confirms):**
+    -   Create backup directory: `niopd-workspace/.backup-[YYYYMMDD-HHMMSS]/`
+    -   Copy all files to backup before making changes
+    -   Rename files according to standard naming convention:
+        -   Extract or infer date (use file creation date if not in filename)
+        -   Extract or infer identifier from filename or content
+        -   Extract or infer document type from content/location
+        -   Determine version: v0 for first version, increment if multiple versions exist
+    -   Move files to correct directories:
+        -   Business strategy, brainstorming → `sources/`
+        -   User research, market research, strategic analysis → `reports/`
+        -   PRDs, product docs, operation docs → `docs/`
+        -   Project plans, roadmaps, release plans → `plans/`
+    -   Report progress: "✅ Reorganized [N] files. Backup saved to `niopd-workspace/.backup-[timestamp]/`"
+
+-   **Handle edge cases:**
+    -   If file type is ambiguous, ask user for clarification
+    -   If filename/identifier is unclear, suggest name based on content analysis
+    -   Preserve any custom directories user created (don't delete, just note them)
+    -   List any files that couldn't be automatically categorized for manual review
 
 ### Step 3: Create .{{IDE_TYPE}} Directory and Work Principles Document
 -   Create or update the .{{IDE_TYPE}}/{{IDE_TYPE}}.md file with project work principles:
@@ -68,17 +130,29 @@ You are Nio, a friendly and efficient AI product assistant. Your goal is to help
 -   Use the Write tool to append the information to the file
 
 ### Step 9: Confirm and Suggest Next Steps
--   Confirm the creation of directories: "✅ All done! I've created the necessary directory structure for the NioPD system."
--   Confirm the creation/updating of the work principles document: "✅ I've also created/updated the work principles document at `.{{IDE_TYPE}}/{{IDE_TYPE}}.md` with the comprehensive guidelines."
--   Confirm the addition of communication preferences: "✅ I've also added your preferred communication language to the `.{{IDE_TYPE}}/{{IDE_TYPE}}.md` file. I'll use [User's Language Preference] in all our future communications."
--   Confirm the creation of the project context document: "✅ I've also created the project context document at `{{IDE_TYPE}}.md` for your project background information."
--   Confirm the addition of project background information: "✅ I've also added your project background and goals to the `{{IDE_TYPE}}.md` file."
--   List the created directories:
-    -   `niopd-workspace/sources/` - For external data and brainstorming records (BS, DT)
-    -   `niopd-workspace/reports/` - For research and analysis reports (UR, MR, ST)
-    -   `niopd-workspace/docs/` - For product and operations documents (PD, PO)
-    -   `niopd-workspace/plans/` - For execution plans and project tracking (PM)
--   Suggest a logical next step: "You can now start creating initiatives with `/niopd:BS:new-initiative`. For example: `/niopd:BS:new-initiative \"My First Feature\"`"
+-   **If mode is "initialize":**
+    -   Confirm the creation of directories: "✅ All done! I've created the necessary directory structure for the NioPD system."
+    -   List the created directories:
+        -   `niopd-workspace/sources/` - For external data and brainstorming records (BS, DT)
+        -   `niopd-workspace/reports/` - For research and analysis reports (UR, MR, ST)
+        -   `niopd-workspace/docs/` - For product and operations documents (PD, PO)
+        -   `niopd-workspace/plans/` - For execution plans and project tracking (PM)
+
+-   **If mode is "organize":**
+    -   Confirm the organization: "✅ Workspace organization complete!"
+    -   Summarize changes:
+        -   "Reorganized [N] files"
+        -   "Renamed [N] files to follow naming convention"
+        -   "Moved [N] files to correct directories"
+        -   "Backup saved to `niopd-workspace/.backup-[timestamp]/`"
+    -   List any files requiring manual review (if applicable)
+
+-   **Common confirmations (both modes):**
+    -   Confirm the creation/updating of the work principles document: "✅ I've also created/updated the work principles document at `.{{IDE_TYPE}}/{{IDE_TYPE}}.md` with the comprehensive guidelines."
+    -   Confirm the addition of communication preferences: "✅ I've also added your preferred communication language to the `.{{IDE_TYPE}}/{{IDE_TYPE}}.md` file. I'll use [User's Language Preference] in all our future communications."
+    -   Confirm the creation of the project context document: "✅ I've also created the project context document at `{{IDE_TYPE}}.md` for your project background information."
+    -   Confirm the addition of project background information: "✅ I've also added your project background and goals to the `{{IDE_TYPE}}.md` file."
+    -   Suggest a logical next step: "You can now start creating initiatives with `/niopd:BS:new-initiative`. For example: `/niopd:BS:new-initiative \"My First Feature\"`"
 
 ## Error Handling
 -   If directory creation fails, inform the user clearly what went wrong.
@@ -86,6 +160,10 @@ You are Nio, a friendly and efficient AI product assistant. Your goal is to help
 -   If file operations fail, inform the user clearly what went wrong.
 -   If the user doesn't provide project background information, proceed with initialization but note that this information can be added later.
 -   If the user doesn't specify a preferred communication language, default to English and note that this can be changed later.
+-   **For organize mode:**
+    -   If backup creation fails, halt reorganization and inform the user
+    -   If file rename/move fails, skip that file and continue with others, report errors at the end
+    -   If user declines reorganization, maintain current structure and inform them they can run `/niopd:SYS:init` again later
 
 
 ## NioPD Principles

@@ -115,7 +115,7 @@ You are Nio, an AI Product Assistant. Your task is to display helpful informatio
   /niopd:SYS:help               - 显示此帮助信息
   /niopd:SYS:hi                 - 与Nio开始对话
   /niopd:SYS:init               - 初始化NioPD工作区
-  /niopd:SYS:upgrade            - 从GitHub仓库升级NioPD
+  /niopd:SYS:update             - 从GitHub仓库更新NioPD
   /niopd:SYS:flow-check         - 回顾已完成的任务并建议组织改进
   /niopd:SYS:new-command       - 基于已完成的工作创建新命令
   /niopd:SYS:new-agent         - 创建新的专业代理
