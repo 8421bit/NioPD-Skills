@@ -42,6 +42,10 @@ You are Nio, a friendly and efficient AI product assistant. Your goal is to help
         -   `niopd-workspace/docs/` - For product and operations documents (PD, PO)
         -   `niopd-workspace/plans/` - For execution plans and project tracking (PM)
     -   Execute the command: `mkdir -p niopd-workspace/sources niopd-workspace/reports niopd-workspace/docs niopd-workspace/plans`
+    -   **Clean up workspace root:**
+        -   Check if there are any files directly in `niopd-workspace/` (not in subdirectories)
+        -   Check if there are any non-standard subdirectories
+        -   If found, proceed to Step 2.5 to organize them
 
 -   **If mode is "organize":**
     -   Verify all required directories exist:
@@ -52,11 +56,18 @@ You are Nio, a friendly and efficient AI product assistant. Your goal is to help
     -   Create any missing directories
     -   Inform user: "✅ Verified directory structure. All required directories are present."
 
-### Step 2.5: Organize Existing Workspace (Only if mode is "organize")
--   **Scan existing files:**
+### Step 2.5: Organize Existing Workspace (For both "initialize" and "organize" modes if needed)
+-   **Check if organization is needed:**
+    -   For "initialize" mode: Check if workspace root or non-standard directories contain files
+    -   For "organize" mode: Always run this step
+    -   If no files to organize and no non-standard directories, skip to Step 3
+
+-   **Scan existing files and directories:**
     -   List all files in `niopd-workspace/` and subdirectories
+    -   List all directories in `niopd-workspace/`
     -   Identify files that don't follow the naming convention: `[YYYYMMDD]-<identifier>-<document-type>-v[version].md`
     -   Identify files in wrong directories based on their type
+    -   Identify non-standard directories (directories other than `sources/`, `reports/`, `docs/`, `plans/`, and `.backup-*/`)
 
 -   **Analyze and categorize files:**
     -   For each file, determine:
@@ -65,16 +76,30 @@ You are Nio, a friendly and efficient AI product assistant. Your goal is to help
         -   Creation date (from file metadata or content)
     -   Create a reorganization plan
 
+-   **Identify directories to clean up:**
+    -   Standard directories to keep: `sources/`, `reports/`, `docs/`, `plans/`
+    -   System directories to preserve: `.backup-*/` (backup directories)
+    -   List all other directories as "non-standard directories to remove"
+    -   For each non-standard directory:
+        -   Check if it contains any files
+        -   If contains files, plan to move files to appropriate standard directories first
+        -   Mark empty directories for deletion
+
 -   **Present reorganization plan to user:**
     -   Show current file structure
     -   Show proposed changes:
         -   Files to rename (with old name → new name)
         -   Files to move (with old path → new path)
-    -   Ask for confirmation: "I've identified [N] files that need reorganization. Would you like me to proceed with these changes? (yes/no)"
+        -   **Non-standard directories to remove** (list each directory)
+        -   Files from non-standard directories and their destination
+    -   Ask for confirmation: "I've identified [N] files that need reorganization and [M] non-standard directories to remove. Would you like me to proceed with these changes? (yes/no)"
 
 -   **Execute reorganization (if user confirms):**
     -   Create backup directory: `niopd-workspace/.backup-[YYYYMMDD-HHMMSS]/`
-    -   Copy all files to backup before making changes
+    -   Copy all files AND directory structure to backup before making changes
+    -   **Move files from workspace root** (if any):
+        -   Analyze each file in `niopd-workspace/` root
+        -   Categorize and move to appropriate standard directory
     -   Rename files according to standard naming convention:
         -   Extract or infer date (use file creation date if not in filename)
         -   Extract or infer identifier from filename or content
@@ -85,12 +110,16 @@ You are Nio, a friendly and efficient AI product assistant. Your goal is to help
         -   User research, market research, strategic analysis → `reports/`
         -   PRDs, product docs, operation docs → `docs/`
         -   Project plans, roadmaps, release plans → `plans/`
-    -   Report progress: "✅ Reorganized [N] files. Backup saved to `niopd-workspace/.backup-[timestamp]/`"
+    -   **Remove non-standard directories:**
+        -   First ensure all files from non-standard directories have been moved
+        -   Delete empty non-standard directories
+        -   Keep only: `sources/`, `reports/`, `docs/`, `plans/`, and `.backup-*/`
+    -   Report progress: "✅ Reorganized [N] files, removed [M] non-standard directories. Backup saved to `niopd-workspace/.backup-[timestamp]/`"
 
 -   **Handle edge cases:**
     -   If file type is ambiguous, ask user for clarification
     -   If filename/identifier is unclear, suggest name based on content analysis
-    -   Preserve any custom directories user created (don't delete, just note them)
+    -   **Non-standard directories with unclear content**: Ask user for confirmation before moving files
     -   List any files that couldn't be automatically categorized for manual review
 
 ### Step 3: Create .{{IDE_TYPE}} Directory and Work Principles Document
@@ -132,6 +161,11 @@ You are Nio, a friendly and efficient AI product assistant. Your goal is to help
 ### Step 9: Confirm and Suggest Next Steps
 -   **If mode is "initialize":**
     -   Confirm the creation of directories: "✅ All done! I've created the necessary directory structure for the NioPD system."
+    -   If files were organized or directories removed:
+        -   Summarize cleanup:
+            -   "Moved [N] files to standard directories"
+            -   "Removed [M] non-standard directories"
+            -   "Backup saved to `niopd-workspace/.backup-[timestamp]/`"
     -   List the created directories:
         -   `niopd-workspace/sources/` - For external data and brainstorming records (BS, DT)
         -   `niopd-workspace/reports/` - For research and analysis reports (UR, MR, ST)
@@ -144,7 +178,10 @@ You are Nio, a friendly and efficient AI product assistant. Your goal is to help
         -   "Reorganized [N] files"
         -   "Renamed [N] files to follow naming convention"
         -   "Moved [N] files to correct directories"
+        -   "Removed [M] non-standard directories"
         -   "Backup saved to `niopd-workspace/.backup-[timestamp]/`"
+    -   List final directory structure:
+        -   "✅ Standard directories: `sources/`, `reports/`, `docs/`, `plans/`"
     -   List any files requiring manual review (if applicable)
 
 -   **Common confirmations (both modes):**
@@ -160,10 +197,12 @@ You are Nio, a friendly and efficient AI product assistant. Your goal is to help
 -   If file operations fail, inform the user clearly what went wrong.
 -   If the user doesn't provide project background information, proceed with initialization but note that this information can be added later.
 -   If the user doesn't specify a preferred communication language, default to English and note that this can be changed later.
--   **For organize mode:**
-    -   If backup creation fails, halt reorganization and inform the user
+-   **For both initialize and organize modes (when cleanup is needed):**
+    -   If backup creation fails, halt cleanup and inform the user
     -   If file rename/move fails, skip that file and continue with others, report errors at the end
-    -   If user declines reorganization, maintain current structure and inform them they can run `/niopd:SYS:init` again later
+    -   If directory deletion fails, report the error but continue with other operations
+    -   If non-standard directory contains unrecognized files, ask user for clarification
+    -   If user declines cleanup, maintain current structure and inform them they can run `/niopd:SYS:init` again later
 
 
 ## NioPD Principles
