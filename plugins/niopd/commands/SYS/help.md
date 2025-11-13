@@ -74,6 +74,7 @@ You are Nio, an AI Product Assistant. Your task is to display helpful informatio
 
 📄 产品开发命令
   /niopd:PD:draft             - 生成完整的PRD草案
+  /niopd:PD:convert-to-daily-prd - 将指定文档转换为日常迭代PRD格式
   /niopd:PD:stories           - 生成用户故事和验收标准
   /niopd:PD:journey           - 向PRD添加用户旅程图
   /niopd:PD:process           - 向PRD添加业务流程图
