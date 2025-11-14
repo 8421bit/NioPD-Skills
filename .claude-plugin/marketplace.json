@@ -11,7 +11,7 @@
   },
   "plugins": [
     {
-      "name": "0niopd",
+      "name": "niopd",
       "source": "./plugins/niopd/",
       "description": "NioPD (Nio Product Development) - A comprehensive product management toolkit for Claude Code that helps product managers discover, define, and deliver great products through AI-powered workflows.",
       "version": "1.0.0",
@@ -24,7 +24,7 @@
       ],
       "author": {
         "name": "8421bit",
-        "email": "[email protected]"
+        "email": "abcute.studio@gmail.com"
       }
     },
     {
@@ -41,7 +41,7 @@
       ],
       "author": {
         "name": "8421bit",
-        "email": "[email protected]"
+        "email": "abcute.studio@gmail.com"
       }
     }
   ]

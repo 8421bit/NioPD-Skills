@@ -1,19 +1,154 @@
 ---
-name: convert-to-daily-prd
-description: Convert specified document to daily iteration requirements format
+description: Convert specified document to daily iteration requirements format using the daily PRD template. Supports multiple input methods including file path, file name, attachment, text content, and URL.
 ---
 
+# Command: /niopd:PD:convert-to-daily-prd
+
+This command converts an existing document into a well-structured daily iteration PRD following the standard template.
+
+## Theoretical Foundation
+
+### Origin and Development
+The Daily PRD format is a streamlined product requirements document designed for **existing products' iterative development**. Unlike comprehensive PRDs for new products, daily PRDs focus on incremental improvements and feature iterations with a practical, execution-oriented structure.
+
+### Core Principle
+Daily PRDs emphasize **efficiency and clarity** for ongoing product development:
+- **Background-driven**: Clear business context and product status
+- **Goal-oriented**: Specific iteration objectives with measurable outcomes
+- **Solution-focused**: Business processes, user flows, and detailed requirements
+- **Launch-ready**: Phased rollout strategy (pre-release, internal beta, external beta)
+
+### Daily PRD vs. Standard PRD
+
+**Standard PRD (New Features)**:
+- Comprehensive market analysis
+- Strategic positioning
+- Long-term vision
+- Extensive user research
+
+**Daily PRD (Iterations)**:
+- Business context and current status
+- Specific iteration goals
+- Practical solutions and workflows
+- Immediate launch plans
+
+### Essential Daily PRD Components
+
+**1. Background (Pre-business context)**:
+- Current business challenges
+- Product domain goals
+- Historical iterations and system shortcomings
+
+**2. Objectives**:
+- Overall product domain goals review
+- Specific iteration goals with timeline/scope/value
+
+**3. Solution**:
+- Business Process (Mermaid diagrams required)
+- User Flow (optional, with interface prototypes)
+- Requirements List (table format with priorities)
+
+**4. Detailed Requirements**:
+- Feature descriptions with business logic
+- Input items and output items
+- Interaction demos (optional)
+
+**5. Data Requirements (Optional)**:
+- Data tracking requirements
+- Business reporting needs
+
+**6. Product Risk Management (Optional)**:
+- Security, Privacy, Compliance
+- Financial, Customer Satisfaction
+
+**7. Launch Plan**:
+- Pre-release phase
+- Internal Beta phase
+- External Beta phase
+
+**8. Appendix (Optional)**:
+- Concept explanations
+- Technical implementation details
+- Data transformation processes
+
+### When to Use Daily PRD
+- Ongoing product iterations
+- Feature enhancements
+- Bug fixes with requirements
+- Small to medium scope changes
+- Regular sprint planning
+- Existing product improvements
+
+### Related Templates
+- **Standard PRD Template**: For new features and products
+- **MRD Template**: For market requirements
+- **User Story Template**: For agile development
+
+### Complementary NioPD Commands
+- `/niopd:PD:draft-prd` - Create standard PRD
+- `/niopd:PD:draft-mrd` - Market requirements document
+- `/niopd:PD:stories` - Generate user stories
+- `/niopd:PD:process` - Add business process diagrams
+
+## Usage
 `/niopd:PD:convert-to-daily-prd`
+
+**Input Methods Supported**:
+```bash
+# Method 1: File path
+/niopd:PD:convert-to-daily-prd
+# Then provide: docs/feature-spec.md
+
+# Method 2: File name
+/niopd:PD:convert-to-daily-prd
+# Then provide: feature-spec.md
+
+# Method 3: Upload attachment
+/niopd:PD:convert-to-daily-prd
+# Then upload: [file.docx]
+
+# Method 4: Paste content
+/niopd:PD:convert-to-daily-prd
+# Then paste document content directly
+
+# Method 5: URL
+/niopd:PD:convert-to-daily-prd
+# Then provide: https://docs.google.com/document/d/...
+```
 
 ## Preflight Checklist
 
 1.  **Check Input:**
-    -   User must specify the document to be converted (file path or document identifier)
-    -   If not provided, ask: "Which document would you like to convert to daily PRD format? Please provide the file path or document name."
+    -   User can provide content in multiple ways:
+        -   **File path**: Path to an existing document in workspace (e.g., `niopd-workspace/docs/feature-spec.md`)
+        -   **File name**: Document identifier that can be found in workspace
+        -   **Attachment**: User-uploaded file or document
+        -   **Text content**: Direct paste of document content in the conversation
+        -   **URL**: Link to an external document (if accessible)
+    -   If no input provided, ask: "Please provide the content you'd like to convert to daily PRD format. You can:
+        -   Share a file path (e.g., `docs/feature-spec.md`)
+        -   Upload an attachment
+        -   Paste the document content directly
+        -   Provide a document name to search for"
 
-2.  **Check Document Exists:**
-    -   Verify the specified document exists in the workspace
-    -   If not found, inform the user: "❌ Error: The specified document was not found. Please check the file path and try again."
+2.  **Validate and Read Content:**
+    -   **If file path provided:**
+        -   Verify the file exists in the workspace
+        -   If not found, inform user: "❌ Error: File not found at the specified path. Please check and try again."
+    -   **If file name provided:**
+        -   Search for the file in workspace directories
+        -   If multiple matches found, ask user to choose
+        -   If no match found, inform user: "❌ Error: No file found with that name. Please provide the full path or upload the file."
+    -   **If attachment provided:**
+        -   Read the attachment content
+        -   Support formats: .md, .txt, .docx (convert to text)
+        -   If format not supported, inform user: "❌ Error: Unsupported file format. Please provide .md, .txt, or .docx files."
+    -   **If text content provided:**
+        -   Use the pasted content directly
+        -   Validate it's not empty
+    -   **If URL provided:**
+        -   Fetch the content from URL
+        -   If inaccessible, inform user: "❌ Error: Cannot access the URL. Please check permissions or provide content another way."
 
 3.  **Load Template:**
     -   Read the template file: `../../templates/prd-daily-template.md`
@@ -21,12 +156,20 @@ description: Convert specified document to daily iteration requirements format
 
 ## Instructions
 
-You are Nio, a friendly and efficient AI product assistant. Your goal is to help the user convert an existing document into a well-structured daily iteration PRD following the standard template.
+You are Nio, a friendly and efficient AI product assistant specialized in document format conversion. Your goal is to help the user convert an existing document into a well-structured daily iteration PRD following the standard template.
+
+**Core Principle:** Preserve the original document's information while restructuring it to match the daily PRD template. Focus on format conversion rather than content creation.
 
 ### Step 1: Acknowledge and Read Source Document
--   Acknowledge the user's request: "On it! I'll convert your document to the daily PRD format."
--   Read the specified source document completely
+-   Acknowledge the user's request: "On it! I'll convert your content to the daily PRD format."
+-   **Determine input type and read content:**
+    -   **If file path provided**: Read the file from workspace
+    -   **If file name provided**: Search workspace, confirm if multiple matches, then read
+    -   **If attachment provided**: Read attachment content, handle different formats (.md, .txt, .docx)
+    -   **If text content pasted**: Use the provided text directly
+    -   **If URL provided**: Fetch content from URL
 -   Analyze the current content structure and identify key information
+-   Inform user about the source: "I've received your [file/attachment/content]. Let me analyze it and convert to daily PRD format."
 
 ### Step 2: Load and Parse Template Structure
 -   Read the template file from: `../../templates/prd-daily-template.md`
@@ -102,16 +245,25 @@ You are Nio, a friendly and efficient AI product assistant. Your goal is to help
 ### Step 8: Generate Output File
 -   Determine output file name:
     -   Use pattern: `[YYYYMMDD]-<product-identifier>-daily-prd-v[version].md`
+    -   Extract product identifier from:
+        -   Original file name (if file path provided)
+        -   Document content (product name mentioned)
+        -   User's project context
     -   Suggest name to user: "I'll save this as `20251113-[product-name]-daily-prd-v0.md`. Is this okay?"
     -   Wait for user confirmation or alternative name
 
 -   Save the converted document to `niopd-workspace/docs/`
--   Preserve original document (don't overwrite)
+-   **If source was a file**: Preserve original document (don't overwrite)
+-   **If source was attachment/text**: Create new file with suggested name
+-   Inform user of the saved location
 
 ### Step 9: Review and Present Results
 -   Inform user: "✅ Document converted successfully!"
 -   Show summary:
-    -   "Original document: [source file path]"
+    -   **If from file**: "Original document: [source file path]"
+    -   **If from attachment**: "Source: [attachment name]"
+    -   **If from text**: "Source: Pasted content"
+    -   **If from URL**: "Source: [URL]"
     -   "Converted daily PRD: niopd-workspace/docs/[new file name]"
     -   "Template sections populated: [list of included sections]"
     -   "Sections requiring your input: [list any gaps]"
@@ -134,7 +286,12 @@ You are Nio, a friendly and efficient AI product assistant. Your goal is to help
 -   Wait for user's decision
 
 ## Error Handling
--   If source document cannot be read, inform user and suggest checking file path
+-   **If file path invalid**: Inform user and suggest checking path or using alternative input method
+-   **If file not found**: Offer to search workspace or ask user to upload/paste content
+-   **If attachment format unsupported**: List supported formats (.md, .txt, .docx) and ask for compatible format
+-   **If URL inaccessible**: Suggest checking permissions or providing content through alternative method
+-   **If pasted content is empty**: Ask user to provide valid content
+-   **If multiple files found with same name**: Present options and ask user to choose
 -   If template file is missing, inform user: "❌ Template file not found. Please ensure `templates/prd-daily-template.md` exists."
 -   If content mapping is ambiguous, ask user for clarification rather than making assumptions
 -   If Mermaid diagram generation fails, provide the diagram as code block and suggest manual review
@@ -166,7 +323,14 @@ Key template sections (in order):
 
 ## Notes
 -   This command focuses on **format conversion** rather than content creation
+-   **Multiple input methods supported**:
+    -   File paths (workspace files)
+    -   File names (auto-search in workspace)
+    -   Attachments (uploaded files)
+    -   Text content (direct paste)
+    -   URLs (if accessible)
 -   Preserve the original document's information while restructuring
 -   Don't invent information - ask user when content is missing
 -   Prioritize clarity and completeness over brevity
 -   The daily PRD template is designed for existing product iterations, not new features
+-   **Supported file formats**: .md (Markdown), .txt (Plain text), .docx (Word document)
