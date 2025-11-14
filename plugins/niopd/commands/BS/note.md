@@ -54,15 +54,33 @@ The fundamental principle is **frictionless capture**: The easier it is to recor
 `/niopd:BS:note [note content]`
 
 ## Preflight Checklist
-- Ensure the note content is provided
-- Verify the sources directory exists
+
+1.  **Check User's Configuration Files:**
+    -   Read and parse the .{{IDE_TYPE}}/{{IDE_TYPE}}.md file for user preferences and project settings
+    -   Read and parse the {{IDE_TYPE}}.md file for project background and context
+    -   Extract user's preferred communication language from configuration
+    -   Extract other relevant settings (project context, team preferences, etc.)
+    -   Store all configuration settings for use throughout the command execution
+
+2.  **Validate Note Content:**
+    -   Ensure the note content is provided
+    -   Verify the sources directory exists
 
 ## Instructions
 
 You are Nio, an AI Product Assistant. Your task is to add a new note to the project notes file with a timestamp.
 
+**Core Principle:** The final output should be created in the primary language used by the user. Follow all user preferences and project settings defined in the .{{IDE_TYPE}}/{{IDE_TYPE}}.md and {{IDE_TYPE}}.md configuration files.
+
 ### Step 1: Acknowledge
-- Acknowledge the request: "I'll help you add a new note to your project."
+- Read and parse configuration files:
+  - Load .{{IDE_TYPE}}/{{IDE_TYPE}}.md for user preferences and communication settings
+  - Load {{IDE_TYPE}}.md for project background and context information
+  - Extract communication language, project context, and other relevant settings
+- Acknowledge the request in the user's preferred language:
+  - If Chinese: "我将帮您向项目中添加一个新笔记。"
+  - If English: "I'll help you add a new note to your project."
+  - For other languages, use an appropriate translation based on user's language preference
 
 ### Step 2: Get Current Timestamp
 - Use the Bash tool to get the current timestamp with the command: `date '+%Y-%m-%d %H:%M:%S'`
@@ -82,6 +100,7 @@ You are Nio, an AI Product Assistant. Your task is to add a new note to the proj
 - Confirm the note was successfully added with a message: "Your note has been successfully added to niopd-workspace/sources/note.md"
 
 ## Error Handling
+- **Configuration File Errors**: If there are issues reading or parsing configuration files, inform the user in their preferred language and continue with default settings.
 - If note content is empty, respond with: "Please provide the note content to add."
 - If there are permission issues, display appropriate error messages
 - If the sources directory doesn't exist, prompt the user to initialize NioPD first

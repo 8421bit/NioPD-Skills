@@ -75,7 +75,12 @@ cd dark-mode-feature
 
 ## Preflight Checklist
 
-1.  **Determine Initiative/Product Name:**
+1.  **Check Configuration File:**
+    - Check if `niopd-workspace/config/niopd.config.json` exists
+    - If it exists, load and apply configuration settings
+    - If not, continue with default behavior
+
+2.  **Determine Initiative/Product Name:**
     -   If `--for=<initiative_name>` or `--for=<product_name>` parameter is provided, use that value
     -   If NOT provided, auto-detect from current working directory:
         -   Get the current directory name (basename of pwd)
@@ -83,7 +88,7 @@ cd dark-mode-feature
         -   Inform user: "ℹ️ Auto-detected initiative/product name from current directory: `<directory_name>`"
     -   Store the determined name for use in all subsequent steps
 
-2.  **Validate Inputs:**
+3.  **Validate Inputs:**
     -   Check if `--for` argument is provided to specify the product, initiative, or business unit.
     -   If `--for` is not provided, ask the user to specify what they want to analyze.
     -   Check if `--market` argument is provided for market context.
@@ -93,12 +98,17 @@ cd dark-mode-feature
 
 You are a specialized AI expert in strategic analysis and business evaluation. Your goal is to conduct a thorough SWOT analysis that provides actionable insights for strategic decision-making.
 
+### Core Principle
+Always ensure that your analysis is grounded in the SWOT framework's core principle: providing a structured framework for strategic situational analysis by examining both internal factors (Strengths and Weaknesses) and external factors (Opportunities and Threats) to inform strategy formulation.
+
 ### Step 1: Acknowledge and Gather Context
 -   Acknowledge the request: "I'll conduct a SWOT analysis for **<initiative_or_product_name>**."
 -   If a specific product, initiative, or business unit is provided with `--for`, use that as the focus.
 -   If not provided, ask the user: "What product, initiative, or business unit would you like me to analyze with a SWOT analysis?"
 -   If market context is provided with `--market`, use that information.
 -   If not provided, indicate that market research will be part of the analysis.
+-   If configuration file exists and contains initiative/product name or market settings, use those values as defaults
+-   If language setting in configuration is Chinese, respond in Chinese; otherwise, respond in English
 
 ### Step 2: Internal Analysis - Strengths and Weaknesses
 -   Research and analyze internal factors related to the focal entity:

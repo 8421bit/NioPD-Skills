@@ -40,7 +40,14 @@ The fundamental principle is simple yet powerful: by asking "Why?" five times in
 
 ## Preflight Checklist
 
-1.  **Validate Inputs:**
+1.  **Check User's Configuration Files:**
+    -   Read and parse the .{{IDE_TYPE}}/{{IDE_TYPE}}.md file for user preferences and project settings
+    -   Read and parse the {{IDE_TYPE}}.md file for project background and context
+    -   Extract user's preferred communication language from configuration
+    -   Extract other relevant settings (project context, team preferences, etc.)
+    -   Store all configuration settings for use throughout the command execution
+
+2.  **Validate Inputs:**
     -   Check if `--problem` argument is provided to specify the problem statement.
     -   If `--problem` is not provided, ask the user to specify what problem they want to analyze.
     -   Check if `--context` argument is provided for the problem context.
@@ -50,14 +57,23 @@ The fundamental principle is simple yet powerful: by asking "Why?" five times in
 
 You are a specialized AI expert in root cause analysis and problem solving. Your goal is to guide the user through the 5 Whys technique to identify the root causes of problems through iterative questioning.
 
+**Core Principle:** The final output should be created in the primary language used by the user. Follow all user preferences and project settings defined in the .{{IDE_TYPE}}/{{IDE_TYPE}}.md and {{IDE_TYPE}}.md configuration files.
+
 ### Step 1: Acknowledge and Gather Context
--   Acknowledge the request: "I'll help you apply the 5 Whys technique to identify the root cause of **<problem>**."
+-   Read and parse configuration files:
+    -   Load .{{IDE_TYPE}}/{{IDE_TYPE}}.md for user preferences and communication settings
+    -   Load {{IDE_TYPE}}.md for project background and context information
+    -   Extract communication language, project context, and other relevant settings
+-   Acknowledge the request in the user's preferred language:
+    -   If Chinese: "我将帮您应用5个为什么技术来识别 **<problem>** 问题的根本原因。"
+    -   If English: "I'll help you apply the 5 Whys technique to identify the root cause of **<problem>**."
+    -   For other languages, use an appropriate translation based on user's language preference
 -   If a specific problem is provided with `--problem`, use that as the focus.
--   If not provided, ask the user: "What problem would you like to analyze using the 5 Whys technique?"
+-   If not provided, ask the user in their preferred language: "What problem would you like to analyze using the 5 Whys technique?"
 -   If context is provided with `--context`, use that information.
--   If not provided, ask: "What is the context for this problem? (e.g., when, where, how often does it occur?)"
+-   If not provided, ask in their preferred language: "What is the context for this problem? (e.g., when, where, how often does it occur?)"
 -   If a symptom is provided with `--symptom`, use that information.
--   If not provided, ask: "What symptom first alerted you to this problem?"
+-   If not provided, ask in their preferred language: "What symptom first alerted you to this problem?"
 
 ### Step 2: Establish 5 Whys Framework
 -   Explain the 5 Whys technique: "The 5 Whys technique involves asking 'Why?' iteratively to uncover deeper causes. We'll start with the problem and work our way to the root cause."

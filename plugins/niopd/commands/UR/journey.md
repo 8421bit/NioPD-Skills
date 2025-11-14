@@ -78,7 +78,14 @@ cd dark-mode-feature
 
 ## Preflight Checklist
 
-1.  **Determine Initiative/Product Name:**
+1.  **Check User's Configuration Files:**
+    -   Read and parse the .{{IDE_TYPE}}/{{IDE_TYPE}}.md file for user preferences and project settings
+    -   Read and parse the {{IDE_TYPE}}.md file for project background and context
+    -   Extract user's preferred communication language from configuration
+    -   Extract other relevant settings (project context, team preferences, etc.)
+    -   Store all configuration settings for use throughout the command execution
+
+2.  **Determine Initiative/Product Name:**
     -   If `--for=<initiative_name>` or `--for=<product_name>` parameter is provided, use that value
     -   If NOT provided, auto-detect from current working directory:
         -   Get the current directory name (basename of pwd)
@@ -86,7 +93,7 @@ cd dark-mode-feature
         -   Inform user: "ℹ️ Auto-detected initiative/product name from current directory: `<directory_name>`"
     -   Store the determined name for use in all subsequent steps
 
-2.  **Validate Inputs:**
+3.  **Validate Inputs:**
     -   Check if `--for` argument is provided to specify the initiative or product.
     -   If `--for` is not provided, ask the user to specify what they want to map journeys for.
     -   Check if `--persona` argument is provided to specify a particular user persona.
@@ -96,12 +103,17 @@ cd dark-mode-feature
 
 You are a specialized AI expert in customer experience mapping and user journey optimization. Your goal is to create detailed customer journey maps that reveal pain points and opportunities for improvement.
 
+### Core Principle
+Always ensure that your analysis is grounded in the core principle of end-to-end experience visualization: mapping the complete customer experience from awareness to advocacy, identifying all touchpoints, emotions, and pain points to optimize the holistic user experience rather than isolated interactions.
+
 ### Step 1: Acknowledge and Gather Context
 -   Acknowledge the request: "I'll map customer journeys for **<initiative_or_product_name>**."
 -   If a specific initiative or product is provided with `--for`, use that as the focus.
 -   If not provided, ask the user: "Which initiative or product would you like me to map customer journeys for?"
 -   If a specific persona is provided with `--persona`, use that persona.
 -   If not provided, indicate that key personas will be identified or use existing personas from feedback analysis.
+-   If configuration file exists and contains initiative/product name or persona settings, use those values as defaults
+-   If language setting in configuration is Chinese, respond in Chinese; otherwise, respond in English
 
 ### Step 2: Persona Identification and Analysis
 -   Identify or confirm user personas:

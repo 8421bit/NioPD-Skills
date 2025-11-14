@@ -2,7 +2,6 @@
 argument-hint: [--for=<initiative_name>|--for=<product_name>] [--template=<canvas_type>]
 description: Generates a comprehensive business model canvas for a product or initiative. Auto-detects initiative/product name from current directory if not specified.
 ---
-
 # Command: /niopd:ST:canvas
 
 This command generates a comprehensive business model canvas to visualize and analyze the key components of a business model for a product or initiative.
@@ -69,7 +68,14 @@ cd dark-mode-feature
 
 ## Preflight Checklist
 
-1.  **Determine Initiative/Product Name:**
+1.  **Check User's Configuration Files:**
+    -   Read and parse the .{{IDE_TYPE}}/{{IDE_TYPE}}.md file for user preferences and project settings
+    -   Read and parse the {{IDE_TYPE}}.md file for project background and context
+    -   Extract user's preferred communication language from configuration
+    -   Extract other relevant settings (project context, team preferences, etc.)
+    -   Store all configuration settings for use throughout the command execution
+
+2.  **Determine Initiative/Product Name:**
     -   If `--for=<initiative_name>` or `--for=<product_name>` parameter is provided, use that value
     -   If NOT provided, auto-detect from current working directory:
         -   Get the current directory name (basename of pwd)
@@ -77,7 +83,7 @@ cd dark-mode-feature
         -   Inform user: "ℹ️ Auto-detected initiative/product name from current directory: `<directory_name>`"
     -   Store the determined name for use in all subsequent steps
 
-2.  **Validate Inputs:**
+3.  **Validate Inputs:**
     -   Check if `--for` argument is provided to specify the product or initiative.
     -   If `--for` is not provided, ask the user to specify what they want to create a canvas for.
     -   Check if `--template` argument is provided to specify the canvas type.
@@ -87,12 +93,21 @@ cd dark-mode-feature
 
 You are a specialized AI expert in business model innovation and strategic visualization. Your goal is to create a comprehensive business model canvas that captures all essential elements of how value is created, delivered, and captured.
 
+**Core Principle:** The final output should be created in the primary language used by the user. Follow all user preferences and project settings defined in the .{{IDE_TYPE}}/{{IDE_TYPE}}.md and {{IDE_TYPE}}.md configuration files.
+
 ### Step 1: Acknowledge and Gather Context
--   Acknowledge the request: "I'll generate a business model canvas for **<initiative_or_product_name>**."
+-   Read and parse configuration files:
+    -   Load .{{IDE_TYPE}}/{{IDE_TYPE}}.md for user preferences and communication settings
+    -   Load {{IDE_TYPE}}.md for project background and context information
+    -   Extract communication language, project context, and other relevant settings
+-   Acknowledge the request in the user's preferred language:
+    -   If Chinese: "我将为 **<initiative_or_product_name>** 生成一个商业模式画布。"
+    -   If English: "I'll generate a business model canvas for **<initiative_or_product_name>**."
+    -   For other languages, use an appropriate translation based on user's language preference
 -   If a specific product or initiative is provided with `--for`, use that as the focus.
--   If not provided, ask the user: "What product or initiative would you like me to create a business model canvas for?"
+-   If not provided, ask the user in their preferred language: "What product or initiative would you like me to create a business model canvas for?"
 -   If a template type is provided with `--template`, use that specific canvas format.
--   If not provided, default to the standard Business Model Canvas and inform the user.
+-   If not provided, default to the standard Business Model Canvas and inform the user in their preferred language.
 
 ### Step 2: Canvas Template Selection
 Available canvas templates include:

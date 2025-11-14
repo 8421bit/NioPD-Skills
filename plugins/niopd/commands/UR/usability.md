@@ -2,7 +2,6 @@
 argument-hint: [--product=<product_name>] [--feature=<feature_name>] [--method=<testing_method>]
 description: Plans and analyzes usability tests to evaluate how easily users can accomplish tasks with a product or feature.
 ---
-
 # Command: /niopd:UR:usability
 
 This command plans and analyzes usability tests to evaluate how easily users can accomplish tasks with a product or feature.
@@ -88,27 +87,39 @@ Ask participants to **verbalize thoughts while performing tasks**:
 
 ## Preflight Checklist
 
-1.  **Validate Product Context:**
-    -   If the `--product` argument is not provided, prompt the user to specify the product context.
-    -   Confirm that the product context is valid and meaningful.
+1.  **Check User's Configuration Files:**
+    -   Read and parse the .{{IDE_TYPE}}/{{IDE_TYPE}}.md file for user preferences and project settings
+    -   Read and parse the {{IDE_TYPE}}.md file for project background and context
+    -   Extract user's preferred communication language from configuration
+    -   Extract other relevant settings (project context, team preferences, etc.)
+    -   Store all configuration settings for use throughout the command execution
 
-2.  **Validate Feature Context:**
-    -   If the `--feature` argument is not provided, prompt the user to specify the feature context.
-    -   Confirm that the feature context is valid and meaningful.
+2. **Validate Product Context:**
+    - If the `--product` argument is not provided, prompt the user to specify the product context.
+    - Confirm that the product context is valid and meaningful.
 
-3.  **Validate Workspace:**
-    -   Check that the `niopd-workspace` directory exists.
-    -   Check that the `niopd-workspace/reports` directory exists, and create it if it doesn't.
+3. **Validate Feature Context:**
+    - If the `--feature` argument is not provided, prompt the user to specify the feature context.
+    - Confirm that the feature context is valid and meaningful.
+
+4. **Validate Workspace:**
+    - Check that the `niopd-workspace` directory exists.
+    - Check that the `niopd-workspace/reports` directory exists, and create it if it doesn't.
 
 ## Instructions
 
 You are a specialized AI expert in user research and usability testing. Your goal is to help users plan and analyze usability tests to evaluate how easily users can accomplish tasks with a product or feature.
+
+### Core Principle
+Always ensure that your analysis is grounded in the core principle of empirical user evaluation: rather than assuming how users will interact with a product, observe actual users attempting real tasks to identify usability issues, validate designs, and measure user experience quality.
 
 ### Step 1: Acknowledge and Gather Data
 -   Acknowledge the request with a message: "I'll help you plan and analyze usability tests for the **<feature_name>** feature of **<product_name>**."
 -   If the `--product` argument wasn't provided, ask the user: "What product would you like to conduct usability testing on?" and wait for their response.
 -   If the `--feature` argument wasn't provided, ask the user: "What specific feature or aspect would you like to test?" and wait for their response.
 -   If the `--method` argument wasn't provided, ask the user: "What usability testing method would you prefer to use?" and wait for their response.
+-   If configuration file exists and contains product, feature, or method settings, use those values as defaults
+-   If language setting in configuration is Chinese, respond in Chinese; otherwise, respond in English
 
 ### Step 2: Testing Method Explanation
 -   Explain the common usability testing methods to the user:

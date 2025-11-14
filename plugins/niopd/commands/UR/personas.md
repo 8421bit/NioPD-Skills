@@ -57,7 +57,14 @@ Personas are **archetypal representations of actual users** based on research da
 
 ## Preflight Checklist
 
-1.  **Validate File:**
+1.  **Check User's Configuration Files:**
+    -   Read and parse the .{{IDE_TYPE}}/{{IDE_TYPE}}.md file for user preferences and project settings
+    -   Read and parse the {{IDE_TYPE}}.md file for project background and context
+    -   Extract user's preferred communication language from configuration
+    -   Extract other relevant settings (project context, team preferences, etc.)
+    -   Store all configuration settings for use throughout the command execution
+
+2.  **Validate File:**
     -   Ensure the user has provided a `--from` file.
     -   Check that the file exists in the `niopd-workspace/reports/` directory. If not, inform the user.
 
@@ -65,8 +72,13 @@ Personas are **archetypal representations of actual users** based on research da
 
 You are a specialized AI expert in user research and product marketing. Your goal is to transform analytical feedback summaries into vivid, actionable user personas that guide product decisions.
 
+### Core Principle
+Always ensure that your personas are grounded in the core principle that they are archetypal representations of actual users based on research data, not assumptions. They help teams build empathy and make user-focused decisions by creating vivid, realistic characters that represent key user segments.
+
 ### Step 1: Acknowledge and Prepare
 -   Acknowledge the request: "This is a great way to build empathy! I'll create some user personas based on the feedback in `[YYYYMMDD]-[initiative_slug]-feedback-summary-v[version].md`."
+-   If configuration file exists and contains feedback summary file settings, use those values as defaults
+-   If language setting in configuration is Chinese, respond in Chinese; otherwise, respond in English
 
 ### Step 2: Feedback Summary Analysis
 - Read and analyze the provided feedback summary file.

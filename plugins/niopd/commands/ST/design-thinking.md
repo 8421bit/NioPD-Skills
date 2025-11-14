@@ -2,7 +2,6 @@
 argument-hint: [--problem=<problem_statement>] [--users=<user_group>] [--context=<design_context>]
 description: Applies design thinking methodology to solve complex problems through human-centered innovation.
 ---
-
 # Command: /niopd:ST:design-thinking
 
 This command applies design thinking methodology to solve complex problems through human-centered innovation, guiding teams through the five phases of design thinking.
@@ -93,23 +92,39 @@ Design Thinking is a **human-centered approach to innovation** that draws from t
 
 ## Preflight Checklist
 
-1. **Validate Parameters:**
+1.  **Check User's Configuration Files:**
+    -   Read and parse the .{{IDE_TYPE}}/{{IDE_TYPE}}.md file for user preferences and project settings
+    -   Read and parse the {{IDE_TYPE}}.md file for project background and context
+    -   Extract user's preferred communication language from configuration
+    -   Extract other relevant settings (project context, team preferences, etc.)
+    -   Store all configuration settings for use throughout the command execution
+
+2. **Validate Parameters:**
     -   If `--problem` not provided, prompt user to define the design challenge
     -   If `--users` not provided, help identify target user groups
     -   If `--context` not provided, gather context about current situation
 
-2. **Validate Workspace:**
+3. **Validate Workspace:**
     -   Check that `niopd-workspace/reports/` exists, create if needed
 
 ## Instructions
 
 You are a specialized AI expert in Design Thinking and human-centered innovation. Your goal is to help teams solve complex problems by deeply understanding users and iterating on creative solutions through the 5 phases: Empathize, Define, Ideate, Prototype, and Test.
 
+**Core Principle:** The final output should be created in the primary language used by the user. Follow all user preferences and project settings defined in the .{{IDE_TYPE}}/{{IDE_TYPE}}.md and {{IDE_TYPE}}.md configuration files.
+
 ### Step 1: Acknowledge and Gather Challenge Context
--   Acknowledge: "I'll guide you through Design Thinking to tackle **<problem>** with a human-centered approach."
--   If `--problem` wasn't provided, ask: "What problem or opportunity are you exploring?"
--   Ask: "Why is this problem important? What's the impact if it's solved?"
--   Ask: "Have you attempted to solve this before? What happened?"
+-   Read and parse configuration files:
+    -   Load .{{IDE_TYPE}}/{{IDE_TYPE}}.md for user preferences and communication settings
+    -   Load {{IDE_TYPE}}.md for project background and context information
+    -   Extract communication language, project context, and other relevant settings
+-   Acknowledge in the user's preferred language:
+    -   If Chinese: "我将引导您通过设计思维来解决 **<problem>** 问题，采用以人为本的方法。"
+    -   If English: "I'll guide you through Design Thinking to tackle **<problem>** with a human-centered approach."
+    -   For other languages, use an appropriate translation based on user's language preference
+-   If `--problem` wasn't provided, ask in the user's preferred language: "What problem or opportunity are you exploring?"
+-   Ask in the user's preferred language: "Why is this problem important? What's the impact if it's solved?"
+-   Ask in the user's preferred language: "Have you attempted to solve this before? What happened?"
 -   Wait for user responses.
 
 ### Step 2: Identify User Groups

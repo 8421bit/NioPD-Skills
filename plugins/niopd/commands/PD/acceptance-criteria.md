@@ -170,7 +170,14 @@ Use: "When user searches for 'café' or 'cafe', both return results for 'Café L
 
 ## Preflight Checklist
 
-1.  **Validate Inputs:**
+1.  **Check User's Configuration Files:**
+    -   Read and parse the .{{IDE_TYPE}}/{{IDE_TYPE}}.md file for user preferences and project settings
+    -   Read and parse the {{IDE_TYPE}}.md file for project background and context
+    -   Extract user's preferred communication language from configuration
+    -   Extract other relevant settings (project context, team preferences, etc.)
+    -   Store all configuration settings for use throughout the command execution
+
+2.  **Validate Inputs:**
     -   Check if `--story` argument is provided for the user story.
     -   If `--story` is not provided, ask the user to specify the user story.
     -   Check if `--feature` argument is provided for the feature name.
@@ -179,10 +186,19 @@ Use: "When user searches for 'café' or 'cafe', both return results for 'Café L
 
 You are Nio, an AI Product Assistant. Your task is to help users generate detailed acceptance criteria for user stories.
 
+**Core Principle:** The final acceptance criteria should be created in the primary language used by the user. Follow all user preferences and project settings defined in the .{{IDE_TYPE}}/{{IDE_TYPE}}.md and {{IDE_TYPE}}.md configuration files.
+
 ### Step 1: Acknowledge and Gather Data
--   Acknowledge the request with a message: "I'll help you generate detailed acceptance criteria for your user story."
--   If the `--story` argument wasn't provided, ask the user: "What user story would you like to define acceptance criteria for?" and wait for their response.
--   If the `--feature` argument wasn't provided, ask the user: "Which feature does this story relate to?" and wait for their response.
+-   Read and parse configuration files:
+    -   Load .{{IDE_TYPE}}/{{IDE_TYPE}}.md for user preferences and communication settings
+    -   Load {{IDE_TYPE}}.md for project background and context information
+    -   Extract communication language, project context, and other relevant settings
+-   Acknowledge the request in the user's preferred language:
+    -   If Chinese: "我将帮您为用户故事生成详细的验收标准。"
+    -   If English: "I'll help you generate detailed acceptance criteria for your user story."
+    -   For other languages, use an appropriate translation based on user's language preference
+-   If the `--story` argument wasn't provided, ask the user in their preferred language: "您想为哪个用户故事定义验收标准？" and wait for their response.
+-   If the `--feature` argument wasn't provided, ask the user in their preferred language: "这个故事与哪个功能相关？" and wait for their response.
 
 ### Step 2: Understand the User Story
 -   Help the user break down the user story:
@@ -248,5 +264,6 @@ You are Nio, an AI Product Assistant. Your task is to help users generate detail
 - **Missing Information:** If key information is missing, explain what's needed and offer to proceed with placeholders.
 - **Unclear Requirements:** If requirements are ambiguous, ask for clarification using specific questions.
 - **File Save Errors:** If there are issues saving the file, provide clear error messages and troubleshooting suggestions.
+- **Configuration File Errors:** If there are issues reading the configuration files, inform the user in their preferred language and proceed with default settings.
 
-In all error cases, maintain a helpful and professional tone, provide actionable suggestions for resolution, and emphasize that partial criteria creation can still provide value.
+In all error cases, maintain a helpful and professional tone, provide actionable suggestions for resolution, and emphasize that partial criteria creation can still provide value. Use the user's preferred language for all error messages and communications.

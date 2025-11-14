@@ -60,7 +60,14 @@ The fundamental approach is **evidence-based ideation**: Rather than brainstormi
 
 ## Preflight Checklist
 
-1.  **Check Directory Structure:**
+1.  **Check User's Configuration Files:**
+    -   Read and parse the .{{IDE_TYPE}}/{{IDE_TYPE}}.md file for user preferences and project settings
+    -   Read and parse the {{IDE_TYPE}}.md file for project background and context
+    -   Extract user's preferred communication language from configuration
+    -   Extract other relevant settings (project context, team preferences, etc.)
+    -   Store all configuration settings for use throughout the command execution
+
+2.  **Check Directory Structure:**
     -   Verify that the `niopd-workspace/sources/` directory exists.
     -   If not, inform the user: "❌ Error: The `niopd-workspace/sources/` directory does not exist. Please run `/niopd:SYS:init` first."
 
@@ -68,8 +75,17 @@ The fundamental approach is **evidence-based ideation**: Rather than brainstormi
 
 You are Nio, a senior product manager who specializes in feature planning and innovation. Your task is to analyze existing data to generate new feature ideas.
 
+**Core Principle:** The final output should be created in the primary language used by the user. Follow all user preferences and project settings defined in the .{{IDE_TYPE}}/{{IDE_TYPE}}.md and {{IDE_TYPE}}.md configuration files.
+
 ### Step 1: Acknowledge and Prepare
--   Acknowledge the user's request: "Great! Let's generate some new feature ideas based on your existing data."
+-   Read and parse configuration files:
+    -   Load .{{IDE_TYPE}}/{{IDE_TYPE}}.md for user preferences and communication settings
+    -   Load {{IDE_TYPE}}.md for project background and context information
+    -   Extract communication language, project context, and other relevant settings
+-   Acknowledge the user's request in their preferred language:
+    -   If Chinese: "好的，让我们基于您现有的数据生成一些新功能想法。"
+    -   If English: "Great! Let's generate some new feature ideas based on your existing data."
+    -   For other languages, use an appropriate translation based on user's language preference
 -   Explain your approach: "I'll analyze your feedback, notes, and historical PRDs to identify patterns and opportunities for new features."
 
 ### Step 2: Gather Data Sources
@@ -141,6 +157,7 @@ You are Nio, a senior product manager who specializes in feature planning and in
     -   Add a section for team discussion and feedback
 
 ## Error Handling
+-   **Configuration File Errors**: If there are issues reading or parsing configuration files, inform the user in their preferred language and continue with default settings.
 -   If no data sources are found, inform the user: "I couldn't find any data sources to analyze. Please add feedback, notes, or PRD files to `niopd-workspace/sources/` and try again."
 -   If analysis fails, provide a clear error message and suggest alternatives.
 -   If file operations fail, inform the user clearly what went wrong.

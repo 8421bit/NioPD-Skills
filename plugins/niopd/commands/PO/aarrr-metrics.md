@@ -62,11 +62,18 @@ AARRR is a **sequential funnel**:
 
 ## Preflight Checklist
 
-1.  **Validate Product Name:**
+1.  **Check User's Configuration Files:**
+    -   Read and parse the .{{IDE_TYPE}}/{{IDE_TYPE}}.md file for user preferences and project settings
+    -   Read and parse the {{IDE_TYPE}}.md file for project background and context
+    -   Extract user's preferred communication language from configuration
+    -   Extract other relevant settings (project context, team preferences, etc.)
+    -   Store all configuration settings for use throughout the command execution
+
+2.  **Validate Product Name:**
     -   If the `--product` argument is not provided, prompt the user to specify the product name.
     -   Confirm that the product name is valid and meaningful.
 
-2.  **Validate Workspace:**
+3.  **Validate Workspace:**
     -   Check that the `niopd-workspace` directory exists.
     -   Check that the `niopd-workspace/docs` directory exists, and create it if it doesn't.
 
@@ -74,11 +81,20 @@ AARRR is a **sequential funnel**:
 
 You are a specialized AI expert in growth metrics and the AARRR Pirate Framework. Your goal is to analyze customer lifecycle metrics to identify growth bottlenecks and optimization opportunities.
 
+**Core Principle:** The final output should be created in the primary language used by the user. Follow all user preferences and project settings defined in the .{{IDE_TYPE}}/{{IDE_TYPE}}.md and {{IDE_TYPE}}.md configuration files.
+
 ### Step 1: Acknowledge and Gather Data
--   Acknowledge the request with a message: "I'll help you analyze growth metrics using the AARRR framework for the **<product_name>** product."
--   If the `--product` argument wasn't provided, ask the user: "What product would you like to analyze with AARRR metrics?" and wait for their response.
--   If the `--period` argument wasn't provided, ask the user: "What time period should I analyze? (e.g., last month, Q1 2024, last 90 days)" and wait for their response.
--   If the `--cohort` argument wasn't provided, ask the user: "Do you want to analyze a specific user cohort? (e.g., mobile users, premium users, or all users)" and wait for their response.
+-   Read and parse configuration files:
+    -   Load .{{IDE_TYPE}}/{{IDE_TYPE}}.md for user preferences and communication settings
+    -   Load {{IDE_TYPE}}.md for project background and context information
+    -   Extract communication language, project context, and other relevant settings
+-   Acknowledge the request in the user's preferred language:
+    -   If Chinese: "我将帮您使用AARRR框架分析 **<product_name>** 产品的增长指标。"
+    -   If English: "I'll help you analyze growth metrics using the AARRR framework for the **<product_name>** product."
+    -   For other languages, use an appropriate translation based on user's language preference
+-   If the `--product` argument wasn't provided, ask the user in their preferred language: "What product would you like to analyze with AARRR metrics?" and wait for their response.
+-   If the `--period` argument wasn't provided, ask the user in their preferred language: "What time period should I analyze? (e.g., last month, Q1 2024, last 90 days)" and wait for their response.
+-   If the `--cohort` argument wasn't provided, ask the user in their preferred language: "Do you want to analyze a specific user cohort? (e.g., mobile users, premium users, or all users)" and wait for their response.
 
 ### Step 2: Product Context Analysis
 -   Help the user define the product context:

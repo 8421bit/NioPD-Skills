@@ -240,7 +240,14 @@ cd dark-mode-feature
 
 ## Preflight Checklist
 
-1.  **Determine PRD Name:**
+1.  **Check User's Configuration Files:**
+    -   Read and parse the .{{IDE_TYPE}}/{{IDE_TYPE}}.md file for user preferences and project settings
+    -   Read and parse the {{IDE_TYPE}}.md file for project background and context
+    -   Extract user's preferred communication language from configuration
+    -   Extract other relevant settings (project context, team preferences, etc.)
+    -   Store all configuration settings for use throughout the command execution
+
+2.  **Determine PRD Name:**
     -   If `--for=<prd_name>` parameter is provided, use that value
     -   If NOT provided, auto-detect from current working directory:
         -   Get the current directory name (basename of pwd)
@@ -248,7 +255,7 @@ cd dark-mode-feature
         -   Inform user: "ℹ️ Auto-detected PRD name from current directory: `<directory_name>`"
     -   Store the determined name as `<prd_name>` for use in all subsequent steps
 
-2.  **Validate PRD:**
+3.  **Validate PRD:**
     -   Check that the PRD file following the naming convention `[YYYYMMDD]-<initiative_slug>-prd-v[version].md` exists in `niopd-workspace/docs/`. If not, inform the user.
     -   Identify the latest version of the PRD file based on the date and version number in the filename.
     -   Verify that the PRD file contains a timing section where the roadmap can be added.
@@ -261,8 +268,17 @@ cd dark-mode-feature
 
 You are a specialized AI expert in product planning and timeline visualization. Your goal is to analyze an existing PRD and add a comprehensive Gantt chart to the timing section that illustrates the implementation timeline and milestones described in the document.
 
+**Core Principle:** The final roadmap documentation should be created in the primary language used by the user. Follow all user preferences and project settings defined in the .{{IDE_TYPE}}/{{IDE_TYPE}}.md and {{IDE_TYPE}}.md configuration files.
+
 ### Step 1: Acknowledge and Gather Data
--   Acknowledge the request: "I'll help you add a roadmap Gantt chart to the timing section of the **<prd_name>** PRD."
+-   Read and parse configuration files:
+    -   Load .{{IDE_TYPE}}/{{IDE_TYPE}}.md for user preferences and communication settings
+    -   Load {{IDE_TYPE}}.md for project background and context information
+    -   Extract communication language, project context, and other relevant settings
+-   Acknowledge the request in the user's preferred language:
+    -   If Chinese: "我将帮您为 **<prd_name>** PRD 的时间节奏部分添加路线图甘特图。"
+    -   If English: "I'll help you add a roadmap Gantt chart to the timing section of the **<prd_name>** PRD."
+    -   For other languages, use an appropriate translation based on user's language preference
 -   Read the LATEST version of the PRD file from `niopd-workspace/docs/[YYYYMMDD]-<initiative_slug>-prd-v[version].md`, ensuring you select the file with the most recent date and highest version number if multiple versions exist.
 -   Search for and read relevant project management reports that could enhance roadmap planning:
     -   Project update reports for current status and progress

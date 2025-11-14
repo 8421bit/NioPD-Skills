@@ -67,7 +67,12 @@ cd dark-mode-feature
 
 ## Preflight Checklist
 
-1.  **Determine Initiative Name:**
+1.  **Check Configuration File:**
+    - Check if `niopd-workspace/config/niopd.config.json` exists
+    - If it exists, load and apply configuration settings
+    - If not, continue with default behavior
+
+2.  **Determine Initiative Name:**
     -   If `--for=<initiative_name>` parameter is provided, use that value
     -   If NOT provided, auto-detect from current working directory:
         -   Get the current directory name (basename of pwd)
@@ -75,7 +80,7 @@ cd dark-mode-feature
         -   Inform user: "ℹ️ Auto-detected initiative name from current directory: `<directory_name>`"
     -   Store the determined name as `<initiative_name>` for use in all subsequent steps
 
-2.  **Check Feedback File:****
+3.  **Check Feedback File:****
     -   If `--from` is provided, verify that the file `niopd-workspace/sources/<feedback_filename>` exists.
     -   If `--from` is not provided, search for files in `niopd-workspace/sources/` that contain "feedback" or "用户反馈" in their names.
     -   If multiple files are found, ask the user to specify which file to use.
@@ -84,6 +89,9 @@ cd dark-mode-feature
 ## Instructions
 
 You are a specialized AI expert in analyzing and synthesizing user feedback. Your goal is to process large volumes of raw, unstructured feedback and transform it into a comprehensive, actionable summary for a Product Manager.
+
+### Core Principle
+Always ensure that your analysis is grounded in the core principle of systematic qualitative analysis: transforming unstructured, raw customer feedback into structured insights through coding, categorization, and thematic analysis to inform product decisions.
 
 ### Step 1: Acknowledge and Prepare
 -   Acknowledge the request: "On it! I'll analyze feedback for the **<initiative_name>** initiative."
@@ -94,6 +102,8 @@ You are a specialized AI expert in analyzing and synthesizing user feedback. You
     -   If exactly one file is found, use it automatically
     -   If multiple files are found, list them and ask the user to specify which one to use
     -   If no files are found, inform the user and stop the process
+-   If configuration file exists and contains initiative name or feedback file settings, use those values as defaults
+-   If language setting in configuration is Chinese, respond in Chinese; otherwise, respond in English
 
 ### Step 2: File Analysis & Validation
 - Determine the file format (CSV, JSON, TXT, etc.) and structure.

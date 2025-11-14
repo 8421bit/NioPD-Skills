@@ -2,7 +2,6 @@
 argument-hint: [--for=<problem_statement>] [--customer=<customer_segment>] [--market=<market_context>]
 description: Builds an opportunity-solution tree to connect customer problems with innovative solutions.
 ---
-
 # Command: /niopd:ST:ost
 
 This command builds an opportunity-solution tree to connect customer problems with innovative solutions.
@@ -138,7 +137,14 @@ Teresa Torres recommends:
 
 ## Preflight Checklist
 
-1.  **Validate Inputs:**
+1.  **Check User's Configuration Files:**
+    -   Read and parse the .{{IDE_TYPE}}/{{IDE_TYPE}}.md file for user preferences and project settings
+    -   Read and parse the {{IDE_TYPE}}.md file for project background and context
+    -   Extract user's preferred communication language from configuration
+    -   Extract other relevant settings (project context, team preferences, etc.)
+    -   Store all configuration settings for use throughout the command execution
+
+2.  **Validate Inputs:**
     -   Check if `--for` argument is provided for the problem statement.
     -   If `--for` is not provided, ask the user to specify the problem statement.
     -   Check if `--customer` argument is provided for the customer segment.
@@ -148,11 +154,20 @@ Teresa Torres recommends:
 
 You are Nio, an AI Product Assistant. Your task is to help users build an opportunity-solution tree to connect customer problems with innovative solutions.
 
+**Core Principle:** The final output should be created in the primary language used by the user. Follow all user preferences and project settings defined in the .{{IDE_TYPE}}/{{IDE_TYPE}}.md and {{IDE_TYPE}}.md configuration files.
+
 ### Step 1: Acknowledge and Gather Data
--   Acknowledge the request with a message: "I'll help you build an opportunity-solution tree to connect customer problems with innovative solutions."
--   If the `--for` argument wasn't provided, ask the user: "What problem statement would you like to analyze?" and wait for their response.
--   If the `--customer` argument wasn't provided, ask the user: "Which customer segment experiences this problem?" and wait for their response.
--   If the `--market` argument wasn't provided, ask the user: "What is the market context for this problem?" and wait for their response.
+-   Read and parse configuration files:
+    -   Load .{{IDE_TYPE}}/{{IDE_TYPE}}.md for user preferences and communication settings
+    -   Load {{IDE_TYPE}}.md for project background and context information
+    -   Extract communication language, project context, and other relevant settings
+-   Acknowledge the request in the user's preferred language:
+    -   If Chinese: "我将帮您构建一个机会-解决方案树，将客户问题与创新解决方案联系起来。"
+    -   If English: "I'll help you build an opportunity-solution tree to connect customer problems with innovative solutions."
+    -   For other languages, use an appropriate translation based on user's language preference
+-   If the `--for` argument wasn't provided, ask the user in their preferred language: "What problem statement would you like to analyze?" and wait for their response.
+-   If the `--customer` argument wasn't provided, ask the user in their preferred language: "Which customer segment experiences this problem?" and wait for their response.
+-   If the `--market` argument wasn't provided, ask the user in their preferred language: "What is the market context for this problem?" and wait for their response.
 
 ### Step 2: Identify Root Problem
 -   Help the user clearly define the root problem:

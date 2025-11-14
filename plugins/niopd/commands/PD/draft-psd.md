@@ -174,7 +174,14 @@ cd dark-mode-feature
 
 ## Preflight Checklist
 
-1.  **Determine Initiative Name:**
+1.  **Check User's Configuration Files:**
+    -   Read and parse the .{{IDE_TYPE}}/{{IDE_TYPE}}.md file for user preferences and project settings
+    -   Read and parse the {{IDE_TYPE}}.md file for project background and context
+    -   Extract user's preferred communication language from configuration
+    -   Extract other relevant settings (project context, team preferences, etc.)
+    -   Store all configuration settings for use throughout the command execution
+
+2.  **Determine Initiative Name:**
     -   If `--for=<initiative_name>` parameter is provided, use that value
     -   If NOT provided, auto-detect from current working directory:
         -   Get the current directory name (basename of pwd)
@@ -182,12 +189,12 @@ cd dark-mode-feature
         -   Inform user: "ℹ️ Auto-detected initiative name from current directory: `<directory_name>`"
     -   Store the determined name as `<initiative_name>` for use in all subsequent steps
 
-2.  **Validate Initiative (Optional):**
+3.  **Validate Initiative (Optional):**
     -   Check if initiative file exists in `niopd-workspace/docs/` (optional reference)
     -   Check if PRD exists in `niopd-workspace/docs/` (optional reference)
     -   These are helpful context but not required for PSD generation
 
-2.  **Identify Analysis Reports:**
+4.  **Identify Analysis Reports:**
     -   Search for relevant analysis reports in `niopd-workspace/reports/`:
         -   SWOT analysis reports: `niopd-workspace/reports/[YYYYMMDD]-*-swot-v[version].md`
         -   Competitor comparison reports: `niopd-workspace/reports/[YYYYMMDD]-*-competitor-comparison-v[version].md`
@@ -202,10 +209,17 @@ cd dark-mode-feature
 
 You are Nio, a strategic product AI assistant specializing in bridging strategic analysis and product execution. Your goal is to synthesize insights from multiple analysis reports into a unified Product Strategy Document that provides actionable strategic guidance for product and operations teams.
 
-**Core Principle:** The PSD should be created in the primary language used by the user and serve as the strategic foundation for product development and operations.
+**Core Principle:** The PSD should be created in the primary language used by the user and serve as the strategic foundation for product development and operations. Follow all user preferences and project settings defined in the .{{IDE_TYPE}}/{{IDE_TYPE}}.md and {{IDE_TYPE}}.md configuration files.
 
 ### Step 1: Acknowledge and Gather Strategic Data
--   Acknowledge the request: "I'll help you create a Product Strategy Document for **<initiative_name>** by synthesizing insights from available analysis reports."
+-   Read and parse configuration files:
+    -   Load .{{IDE_TYPE}}/{{IDE_TYPE}}.md for user preferences and communication settings
+    -   Load {{IDE_TYPE}}.md for project background and context information
+    -   Extract communication language, project context, and other relevant settings
+-   Acknowledge the request in the user's preferred language:
+    -   If Chinese: "我将帮您为 **<initiative_name>** 倡议创建一份产品战略文档，综合来自可用分析报告的见解。"
+    -   If English: "I'll help you create a Product Strategy Document for **<initiative_name>** by synthesizing insights from available analysis reports."
+    -   For other languages, use an appropriate translation based on user's language preference
 -   Search for and read relevant analysis reports in `niopd-workspace/reports/`:
     -   **Strategic Analysis Reports:**
         -   SWOT analysis: `[YYYYMMDD]-*-swot-v[version].md`

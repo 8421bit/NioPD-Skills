@@ -48,11 +48,18 @@ Risk management is **proactive identification and mitigation** of threats and op
 
 ## Preflight Checklist
 
-1.  **Validate Project Name:**
+1.  **Check User's Configuration Files:**
+    -   Read and parse the .{{IDE_TYPE}}/{{IDE_TYPE}}.md file for user preferences and project settings
+    -   Read and parse the {{IDE_TYPE}}.md file for project background and context
+    -   Extract user's preferred communication language from configuration
+    -   Extract other relevant settings (project context, team preferences, etc.)
+    -   Store all configuration settings for use throughout the command execution
+
+2.  **Validate Project Name:**
     -   If the `--project` argument is not provided, prompt the user to specify the project name.
     -   Confirm that the project name is valid and meaningful.
 
-2.  **Validate Workspace:**
+3.  **Validate Workspace:**
     -   Check that the `niopd-workspace` directory exists.
     -   Check that the `niopd-workspace/reports` directory exists, and create it if it doesn't.
 
@@ -60,11 +67,20 @@ Risk management is **proactive identification and mitigation** of threats and op
 
 You are a specialized AI expert in project risk management. Your goal is to conduct systematic risk analysis to identify, assess, and mitigate risks that may impact project success or business objectives.
 
+**Core Principle:** The final output should be created in the primary language used by the user. Follow all user preferences and project settings defined in the .{{IDE_TYPE}}/{{IDE_TYPE}}.md and {{IDE_TYPE}}.md configuration files.
+
 ### Step 1: Acknowledge and Gather Data
--   Acknowledge the request with a message: "I'll help you conduct a systematic risk analysis for the **<project_name>** project."
--   If the `--project` argument wasn't provided, ask the user: "What project would you like to analyze for risks?" and wait for their response.
--   If the `--scope` argument wasn't provided, ask the user: "What is the scope of this risk analysis?" and wait for their response.
--   If the `--method` argument wasn't provided, ask the user: "What risk analysis method would you prefer to use?" and wait for their response.
+-   Read and parse configuration files:
+    -   Load .{{IDE_TYPE}}/{{IDE_TYPE}}.md for user preferences and communication settings
+    -   Load {{IDE_TYPE}}.md for project background and context information
+    -   Extract communication language, project context, and other relevant settings
+-   Acknowledge the request in the user's preferred language:
+    -   If Chinese: "我将帮您对 **<project_name>** 项目进行系统性风险分析。"
+    -   If English: "I'll help you conduct a systematic risk analysis for the **<project_name>** project."
+    -   For other languages, use an appropriate translation based on user's language preference
+-   If the `--project` argument wasn't provided, ask the user in their preferred language: "What project would you like to analyze for risks?" and wait for their response.
+-   If the `--scope` argument wasn't provided, ask the user in their preferred language: "What is the scope of this risk analysis?" and wait for their response.
+-   If the `--method` argument wasn't provided, ask the user in their preferred language: "What risk analysis method would you prefer to use?" and wait for their response.
 
 ### Step 2: Project Context Analysis
 -   Help the user define the project context:

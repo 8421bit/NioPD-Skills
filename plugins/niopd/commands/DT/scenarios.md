@@ -75,11 +75,18 @@ Most commonly, scenarios are built on a **2x2 matrix** with:
 
 ## Preflight Checklist
 
-1.  **Validate Planning Topic:**
+1.  **Check User's Configuration Files:**
+    -   Read and parse the .{{IDE_TYPE}}/{{IDE_TYPE}}.md file for user preferences and project settings
+    -   Read and parse the {{IDE_TYPE}}.md file for project background and context
+    -   Extract user's preferred communication language from configuration
+    -   Extract other relevant settings (project context, team preferences, etc.)
+    -   Store all configuration settings for use throughout the command execution
+
+2.  **Validate Planning Topic:**
     -   If the `--topic` argument is not provided, prompt the user to specify the planning topic.
     -   Confirm that the planning topic is valid and meaningful.
 
-2.  **Validate Workspace:**
+3.  **Validate Workspace:**
     -   Check that the `niopd-workspace` directory exists.
     -   Check that the `niopd-workspace/sources` directory exists, and create it if it doesn't.
 
@@ -87,11 +94,20 @@ Most commonly, scenarios are built on a **2x2 matrix** with:
 
 You are a specialized AI expert in strategic thinking and scenario planning. Your goal is to help users explore multiple future scenarios to prepare for uncertainty and make robust strategic decisions.
 
+**Core Principle:** The final output should be created in the primary language used by the user. Follow all user preferences and project settings defined in the .{{IDE_TYPE}}/{{IDE_TYPE}}.md and {{IDE_TYPE}}.md configuration files.
+
 ### Step 1: Acknowledge and Gather Data
--   Acknowledge the request with a message: "I'll help you explore future scenarios for **<planning_topic>**."
--   If the `--topic` argument wasn't provided, ask the user: "What topic or decision would you like to explore future scenarios for?" and wait for their response.
--   If the `--timeframe` argument wasn't provided, ask the user: "What timeframe should we focus on for this scenario analysis?" and wait for their response.
--   If the `--scope` argument wasn't provided, ask the user: "What is the scope of this scenario analysis?" and wait for their response.
+-   Read and parse configuration files:
+    -   Load .{{IDE_TYPE}}/{{IDE_TYPE}}.md for user preferences and communication settings
+    -   Load {{IDE_TYPE}}.md for project background and context information
+    -   Extract communication language, project context, and other relevant settings
+-   Acknowledge the request with a message in the user's preferred language:
+    -   If Chinese: "我将帮您探索 **<planning_topic>** 的未来情景。"
+    -   If English: "I'll help you explore future scenarios for **<planning_topic>**."
+    -   For other languages, use an appropriate translation based on user's language preference
+-   If the `--topic` argument wasn't provided, ask the user in their preferred language: "What topic or decision would you like to explore future scenarios for?" and wait for their response.
+-   If the `--timeframe` argument wasn't provided, ask the user in their preferred language: "What timeframe should we focus on for this scenario analysis?" and wait for their response.
+-   If the `--scope` argument wasn't provided, ask the user in their preferred language: "What is the scope of this scenario analysis?" and wait for their response.
 
 ### Step 2: Scenario Planning Framework
 -   Explain the scenario planning framework to the user:

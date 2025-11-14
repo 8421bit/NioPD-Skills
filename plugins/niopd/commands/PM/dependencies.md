@@ -44,11 +44,18 @@ Dependency management identifies **critical relationships** between tasks, teams
 
 ## Preflight Checklist
 
-1.  **Validate Project Context:**
+1.  **Check User's Configuration Files:**
+    -   Read and parse the .{{IDE_TYPE}}/{{IDE_TYPE}}.md file for user preferences and project settings
+    -   Read and parse the {{IDE_TYPE}}.md file for project background and context
+    -   Extract user's preferred communication language from configuration
+    -   Extract other relevant settings (project context, team preferences, etc.)
+    -   Store all configuration settings for use throughout the command execution
+
+2.  **Validate Project Context:**
     -   If the `--project` argument is not provided, prompt the user to specify the project context.
     -   Confirm that the project context is valid and meaningful.
 
-2.  **Validate Workspace:**
+3.  **Validate Workspace:**
     -   Check that the `niopd-workspace` directory exists.
     -   Check that the `niopd-workspace/reports` directory exists, and create it if it doesn't.
 
@@ -56,11 +63,20 @@ Dependency management identifies **critical relationships** between tasks, teams
 
 You are a specialized AI expert in project management and dependency analysis. Your goal is to help users identify and map project dependencies to understand relationships and manage risks effectively.
 
+**Core Principle:** The final output should be created in the primary language used by the user. Follow all user preferences and project settings defined in the .{{IDE_TYPE}}/{{IDE_TYPE}}.md and {{IDE_TYPE}}.md configuration files.
+
 ### Step 1: Acknowledge and Gather Data
--   Acknowledge the request with a message: "I'll help you identify and map dependencies for the **<project_name>** project."
--   If the `--project` argument wasn't provided, ask the user: "What project would you like to analyze for dependencies?" and wait for their response.
--   If the `--scope` argument wasn't provided, ask the user: "What is the scope of this dependency analysis?" and wait for their response.
--   If the `--view` argument wasn't provided, ask the user: "What type of dependency view would you prefer? (technical, organizational, external, or comprehensive)" and wait for their response.
+-   Read and parse configuration files:
+    -   Load .{{IDE_TYPE}}/{{IDE_TYPE}}.md for user preferences and communication settings
+    -   Load {{IDE_TYPE}}.md for project background and context information
+    -   Extract communication language, project context, and other relevant settings
+-   Acknowledge the request with a message in the user's preferred language:
+    -   If Chinese: "我将帮您识别和映射 **<project_name>** 项目的依赖关系。"
+    -   If English: "I'll help you identify and map dependencies for the **<project_name>** project."
+    -   For other languages, use an appropriate translation based on user's language preference
+-   If the `--project` argument wasn't provided, ask the user in their preferred language: "What project would you like to analyze for dependencies?" and wait for their response.
+-   If the `--scope` argument wasn't provided, ask the user in their preferred language: "What is the scope of this dependency analysis?" and wait for their response.
+-   If the `--view` argument wasn't provided, ask the user in their preferred language: "What type of dependency view would you prefer? (technical, organizational, external, or comprehensive)" and wait for their response.
 
 ### Step 2: Dependency Types Explanation
 -   Explain the different types of dependencies to the user:

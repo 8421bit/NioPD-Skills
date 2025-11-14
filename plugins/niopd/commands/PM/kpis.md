@@ -58,7 +58,14 @@ cd dark-mode-feature
 
 ## Preflight Checklist
 
-1.  **Determine Initiative Name:**
+1.  **Check User's Configuration Files:**
+    -   Read and parse the .{{IDE_TYPE}}/{{IDE_TYPE}}.md file for user preferences and project settings
+    -   Read and parse the {{IDE_TYPE}}.md file for project background and context
+    -   Extract user's preferred communication language from configuration
+    -   Extract other relevant settings (project context, team preferences, etc.)
+    -   Store all configuration settings for use throughout the command execution
+
+2.  **Determine Initiative Name:**
     -   If `--for=<initiative_name>` parameter is provided, use that value
     -   If NOT provided, auto-detect from current working directory:
         -   Get the current directory name (basename of pwd)
@@ -66,15 +73,24 @@ cd dark-mode-feature
         -   Inform user: "ℹ️ Auto-detected initiative name from current directory: `<directory_name>`"
     -   Store the determined name as `<initiative_name>` for use in all subsequent steps
 
-2.  **Validate Initiative:**
+3.  **Validate Initiative:**
     -   Check that the initiative file `niopd-workspace/docs/*<initiative_slug>*.md` exists. If not, inform the user.
 
 ## Instructions
 
 You are a specialized AI expert in tracking Key Performance Indicators (KPIs). Your goal is to provide comprehensive KPI monitoring and analysis for product initiatives.
 
+**Core Principle:** The final output should be created in the primary language used by the user. Follow all user preferences and project settings defined in the .{{IDE_TYPE}}/{{IDE_TYPE}}.md and {{IDE_TYPE}}.md configuration files.
+
 ### Step 1: Acknowledge and Gather Data
--   Acknowledge the request: "You got it. I'll check the latest KPI status for the **<initiative_name>** initiative."
+-   Read and parse configuration files:
+    -   Load .{{IDE_TYPE}}/{{IDE_TYPE}}.md for user preferences and communication settings
+    -   Load {{IDE_TYPE}}.md for project background and context information
+    -   Extract communication language, project context, and other relevant settings
+-   Acknowledge the request in the user's preferred language:
+    -   If Chinese: "好的。我将检查 **<initiative_name>** 项目的最新KPI状态。"
+    -   If English: "You got it. I'll check the latest KPI status for the **<initiative_name>** initiative."
+    -   For other languages, use an appropriate translation based on user's language preference
 -   Read the initiative file from `niopd-workspace/docs/`.
 
 ### Step 2: File Location & Validation

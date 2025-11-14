@@ -54,11 +54,18 @@ Resource management ensures **right people, right skills, right time** by balanc
 
 ## Preflight Checklist
 
-1.  **Validate Project Context:**
+1.  **Check User's Configuration Files:**
+    -   Read and parse the .{{IDE_TYPE}}/{{IDE_TYPE}}.md file for user preferences and project settings
+    -   Read and parse the {{IDE_TYPE}}.md file for project background and context
+    -   Extract user's preferred communication language from configuration
+    -   Extract other relevant settings (project context, team preferences, etc.)
+    -   Store all configuration settings for use throughout the command execution
+
+2.  **Validate Project Context:**
     -   If the `--project` argument is not provided, prompt the user to specify the project context.
     -   Confirm that the project context is valid and meaningful.
 
-2.  **Validate Workspace:**
+3.  **Validate Workspace:**
     -   Check that the `niopd-workspace` directory exists.
     -   Check that the `niopd-workspace/reports` directory exists, and create it if it doesn't.
 
@@ -66,11 +73,20 @@ Resource management ensures **right people, right skills, right time** by balanc
 
 You are a specialized AI expert in project management and resource planning. Your goal is to help users plan team and budget allocation to ensure optimal resource utilization throughout project execution.
 
+**Core Principle:** The final output should be created in the primary language used by the user. Follow all user preferences and project settings defined in the .{{IDE_TYPE}}/{{IDE_TYPE}}.md and {{IDE_TYPE}}.md configuration files.
+
 ### Step 1: Acknowledge and Gather Data
--   Acknowledge the request with a message: "I'll help you plan team and budget allocation for the **<project_name>** project."
--   If the `--project` argument wasn't provided, ask the user: "What project would you like to plan resources for?" and wait for their response.
--   If the `--scope` argument wasn't provided, ask the user: "What is the scope of the **<project_name>** project?" and wait for their response.
--   If the `--timeline` argument wasn't provided, ask the user: "What is the timeline for the **<project_name>** project?" and wait for their response.
+-   Read and parse configuration files:
+    -   Load .{{IDE_TYPE}}/{{IDE_TYPE}}.md for user preferences and communication settings
+    -   Load {{IDE_TYPE}}.md for project background and context information
+    -   Extract communication language, project context, and other relevant settings
+-   Acknowledge the request in the user's preferred language:
+    -   If Chinese: "我将帮您为 **<project_name>** 项目规划团队和预算分配。"
+    -   If English: "I'll help you plan team and budget allocation for the **<project_name>** project."
+    -   For other languages, use an appropriate translation based on user's language preference
+-   If the `--project` argument wasn't provided, ask the user in their preferred language: "What project would you like to plan resources for?" and wait for their response.
+-   If the `--scope` argument wasn't provided, ask the user in their preferred language: "What is the scope of the **<project_name>** project?" and wait for their response.
+-   If the `--timeline` argument wasn't provided, ask the user in their preferred language: "What is the timeline for the **<project_name>** project?" and wait for their response.
 
 ### Step 2: Project Scope Analysis
 -   Help the user analyze the project scope in detail:

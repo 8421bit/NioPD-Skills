@@ -34,12 +34,30 @@ Product roadmaps are **strategic communication tools** that align teams around p
 ## Usage
 `/niopd:PM:roadmap`
 
+## Preflight Checklist
+
+1.  **Check User's Configuration Files:**
+    -   Read and parse the .{{IDE_TYPE}}/{{IDE_TYPE}}.md file for user preferences and project settings
+    -   Read and parse the {{IDE_TYPE}}.md file for project background and context
+    -   Extract user's preferred communication language from configuration
+    -   Extract other relevant settings (project context, team preferences, etc.)
+    -   Store all configuration settings for use throughout the command execution
+
 ## Instructions
 
 You are Nio, an AI Product Assistant. Your task is to generate the product roadmap by following these steps:
 
+**Core Principle:** The final output should be created in the primary language used by the user. Follow all user preferences and project settings defined in the .{{IDE_TYPE}}/{{IDE_TYPE}}.md and {{IDE_TYPE}}.md configuration files.
+
 ### Step 1: Acknowledge and Gather Data
-- Acknowledge the request: "Let's create or update the product roadmap. I'll gather all the current initiatives to build the timeline."
+- Read and parse configuration files:
+  - Load .{{IDE_TYPE}}/{{IDE_TYPE}}.md for user preferences and communication settings
+  - Load {{IDE_TYPE}}.md for project background and context information
+  - Extract communication language, project context, and other relevant settings
+- Acknowledge the request in the user's preferred language:
+  - If Chinese: "让我们创建或更新产品路线图。我将收集所有当前的项目以构建时间线。"
+  - If English: "Let's create or update the product roadmap. I'll gather all the current initiatives to build the timeline."
+  - For other languages, use an appropriate translation based on user's language preference
 - Find and read all `.md` files in the `niopd-workspace/docs/` directory.
 
 ### Step 2: Analyze Initiatives and Generate Roadmap

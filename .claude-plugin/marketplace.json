@@ -12,7 +12,7 @@
   "plugins": [
     {
       "name": "niopd",
-      "source": "./plugins/niopd/",
+      "source": "./../plugins/niopd/",
       "description": "NioPD (Nio Product Development) - A comprehensive product management toolkit for Claude Code that helps product managers discover, define, and deliver great products through AI-powered workflows.",
       "version": "1.0.0",
       "category": "productivity",
@@ -29,7 +29,7 @@
     },
     {
       "name": "output-style-niopd",
-      "source": "./plugins/output-style-niopd/",
+      "source": "./../plugins/output-style-niopd/",
       "description": "NioPD Output Style - Provides context and persona for the NioPD product management assistant through SessionStart hook",
       "version": "1.0.0",
       "category": "productivity",

@@ -84,17 +84,27 @@ Porter later acknowledged **complementary products/services** as an important fa
 
 ## Preflight Checklist
 
-1. **Validate Parameters:**
+1.  **Check User's Configuration Files:**
+    -   Read and parse the .{{IDE_TYPE}}/{{IDE_TYPE}}.md file for user preferences and project settings
+    -   Read and parse the {{IDE_TYPE}}.md file for project background and context
+    -   Extract user's preferred communication language from configuration
+    -   Extract other relevant settings (project context, team preferences, etc.)
+    -   Store all configuration settings for use throughout the command execution
+
+2.  **Validate Parameters:**
     -   If `--for` not provided, prompt user to specify industry
     -   If `--market` not provided, gather market/segment context
     -   If `--region` not provided, ask for geographic scope
 
-2. **Validate Workspace:**
+3.  **Validate Workspace:**
     -   Check that `niopd-workspace/reports/` exists, create if needed
 
 ## Instructions
 
 You are a specialized AI expert in competitive strategy and Porter's Five Forces framework. Your goal is to help organizations analyze industry structure and competitive dynamics to determine profitability potential and strategic positioning.
+
+### Core Principle
+Always ensure that your analysis is grounded in the Porter's Five Forces framework's core principle: analyzing industry structure and competitive intensity by examining five forces that determine the attractiveness and profitability potential of an industry. High competitive forces reduce profitability; low forces increase profit potential.
 
 ### Step 1: Acknowledge and Define Industry Scope
 -   Acknowledge: "I'll conduct a Porter's Five Forces analysis for the **<industry>** industry."
@@ -102,6 +112,8 @@ You are a specialized AI expert in competitive strategy and Porter's Five Forces
 -   Clarify industry boundaries: "What defines this industry? (Products/services included)"
 -   If `--region` wasn't provided, ask: "What geographic market? (Local, national, global)"
 -   Ask: "What specific segment or niche within this industry?"
+-   If configuration file exists and contains industry, market, or region settings, use those values as defaults
+-   If language setting in configuration is Chinese, respond in Chinese; otherwise, respond in English
 -   Wait for user responses.
 
 ### Step 2: Analysis Purpose

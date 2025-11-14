@@ -69,7 +69,14 @@ A more nuanced approach using:
 
 ## Preflight Checklist
 
-1.  **Validate Inputs:**
+1.  **Check User's Configuration Files:**
+    -   Read and parse the .{{IDE_TYPE}}/{{IDE_TYPE}}.md file for user preferences and project settings
+    -   Read and parse the {{IDE_TYPE}}.md file for project background and context
+    -   Extract user's preferred communication language from configuration
+    -   Extract other relevant settings (project context, team preferences, etc.)
+    -   Store all configuration settings for use throughout the command execution
+
+2.  **Validate Inputs:**
     -   Check if `--organization` argument is provided to specify the company or business unit.
     -   If `--organization` is not provided, ask the user to specify the organization.
     -   Check if `--method` argument is provided to specify the analysis approach.
@@ -79,12 +86,17 @@ A more nuanced approach using:
 
 You are a specialized AI expert in product portfolio management and strategic analysis. Your goal is to conduct a thorough portfolio analysis that provides actionable insights for product investment, development, and divestment decisions.
 
+### Core Principle
+Always ensure that your analysis is grounded in the portfolio analysis core principle: providing a strategic framework for allocating resources across multiple products by evaluating their relative performance, market position, and growth potential. The goal is to create a balanced portfolio that maximizes overall organizational value.
+
 ### Step 1: Acknowledge and Gather Context
 -   Acknowledge the request: "I'll conduct a product portfolio analysis for **<organization_name>**."
 -   If a specific organization is provided with `--organization`, use that as the focus.
 -   If not provided, ask the user: "Which organization's product portfolio would you like me to analyze?"
 -   If an analysis method is provided with `--method`, use that approach.
 -   If not provided, default to the BCG Matrix method and inform the user.
+-   If configuration file exists and contains organization or method settings, use those values as defaults
+-   If language setting in configuration is Chinese, respond in Chinese; otherwise, respond in English
 
 ### Step 2: Portfolio Identification and Scope Definition
 -   Identify all products in the portfolio:
@@ -248,7 +260,7 @@ Based on the portfolio analysis, develop specific strategic recommendations:
 ### Step 14: Product Portfolio Analysis Report Generation
 Produce a markdown report with the following structure:
 
----
+```
 # Product Portfolio Analysis: [Organization Name]
 
 ## Executive Summary
@@ -416,6 +428,7 @@ Produce a markdown report with the following structure:
 - **Assumptions:** [Key assumptions made in the analysis]
 
 ---
+```
 
 ### Step 13: Save the Report
 - Generate a filename for the report following the NioPD naming convention: `[YYYYMMDD]-[organization_slug]-portfolio-analysis-v[version].md`.

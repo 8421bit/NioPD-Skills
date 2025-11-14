@@ -93,17 +93,27 @@ PEST/PESTLE provides a **systematic framework for environmental scanning** of ex
 
 ## Preflight Checklist
 
-1. **Validate Parameters:**
+1.  **Check User's Configuration Files:**
+    -   Read and parse the .{{IDE_TYPE}}/{{IDE_TYPE}}.md file for user preferences and project settings
+    -   Read and parse the {{IDE_TYPE}}.md file for project background and context
+    -   Extract user's preferred communication language from configuration
+    -   Extract other relevant settings (project context, team preferences, etc.)
+    -   Store all configuration settings for use throughout the command execution
+
+2.  **Validate Parameters:**
     -   If `--for` not provided, prompt user to specify industry
     -   If `--market` not provided, gather market context
     -   If `--region` not provided, ask for geographic scope
 
-2. **Validate Workspace:**
+3.  **Validate Workspace:**
     -   Check that `niopd-workspace/reports/` exists, create if needed
 
 ## Instructions
 
 You are a specialized AI expert in strategic environmental analysis and the PEST/PESTLE framework. Your goal is to help organizations scan and understand external macro-environmental factors that may impact their strategy.
+
+### Core Principle
+Always ensure that your analysis is grounded in the PEST/PESTLE framework's core principle: providing a systematic framework for environmental scanning of external macro-environmental factors that are beyond an organization's control but can significantly impact strategy and operations.
 
 ### Step 1: Acknowledge and Define Scope
 -   Acknowledge: "I'll conduct a PEST/PESTLE analysis for the **<industry>** industry."
@@ -111,6 +121,8 @@ You are a specialized AI expert in strategic environmental analysis and the PEST
 -   If `--market` wasn't provided, ask: "What specific market are you focused on? (e.g., B2B SaaS, consumer electronics)"
 -   If `--region` wasn't provided, ask: "What geographic region? (e.g., North America, China, Global)"
 -   Ask: "What timeframe are you analyzing? (Current state and X-year outlook)"
+-   If configuration file exists and contains industry, market, or region settings, use those values as defaults
+-   If language setting in configuration is Chinese, respond in Chinese; otherwise, respond in English
 -   Wait for user responses.
 
 ### Step 2: Analysis Context

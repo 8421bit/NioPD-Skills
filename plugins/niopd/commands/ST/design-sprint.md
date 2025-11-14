@@ -2,7 +2,6 @@
 argument-hint: [--challenge=<business_challenge>] [--duration=<sprint_duration>] [--team=<team_members>]
 description: Facilitates a design sprint process to answer critical business questions through design, prototyping, and testing.
 ---
-
 # Command: /niopd:ST:design-sprint
 
 This command facilitates a design sprint process to answer critical business questions through design, prototyping, and testing ideas with customers in a compressed timeframe.
@@ -114,23 +113,39 @@ The Design Sprint is a **time-constrained, five-phase process** that uses design
 
 ## Preflight Checklist
 
-1. **Validate Parameters:**
+1.  **Check User's Configuration Files:**
+    -   Read and parse the .{{IDE_TYPE}}/{{IDE_TYPE}}.md file for user preferences and project settings
+    -   Read and parse the {{IDE_TYPE}}.md file for project background and context
+    -   Extract user's preferred communication language from configuration
+    -   Extract other relevant settings (project context, team preferences, etc.)
+    -   Store all configuration settings for use throughout the command execution
+
+2. **Validate Parameters:**
     -   If `--challenge` not provided, prompt user to define the business challenge
     -   If `--duration` not provided, default to standard 5-day sprint
     -   If `--team` not provided, help user identify required team members
 
-2. **Validate Workspace:**
+3. **Validate Workspace:**
     -   Check that `niopd-workspace/reports/` exists, create if needed
 
 ## Instructions
 
 You are a specialized AI expert in Design Sprints and rapid prototyping. Your goal is to help teams run effective Design Sprints to solve big problems and test new ideas in 5 days, following Jake Knapp's methodology from Google Ventures.
 
+**Core Principle:** The final output should be created in the primary language used by the user. Follow all user preferences and project settings defined in the .{{IDE_TYPE}}/{{IDE_TYPE}}.md and {{IDE_TYPE}}.md configuration files.
+
 ### Step 1: Acknowledge and Gather Challenge Context
--   Acknowledge: "I'll help you plan a Design Sprint to tackle **<challenge>** in just 5 days."
--   If `--challenge` wasn't provided, ask: "What is the critical business challenge or question you want to answer?"
--   Clarify: "What makes this challenge important right now?"
--   Ask: "What's the ideal outcome if this sprint is successful?"
+-   Read and parse configuration files:
+    -   Load .{{IDE_TYPE}}/{{IDE_TYPE}}.md for user preferences and communication settings
+    -   Load {{IDE_TYPE}}.md for project background and context information
+    -   Extract communication language, project context, and other relevant settings
+-   Acknowledge in the user's preferred language:
+    -   If Chinese: "我将帮您规划一个设计冲刺，以解决 **<challenge>** 问题，只需5天时间。"
+    -   If English: "I'll help you plan a Design Sprint to tackle **<challenge>** in just 5 days."
+    -   For other languages, use an appropriate translation based on user's language preference
+-   If `--challenge` wasn't provided, ask in the user's preferred language: "What is the critical business challenge or question you want to answer?"
+-   Clarify in the user's preferred language: "What makes this challenge important right now?"
+-   Ask in the user's preferred language: "What's the ideal outcome if this sprint is successful?"
 -   Wait for user responses.
 
 ### Step 2: Assemble the Sprint Team
@@ -386,14 +401,14 @@ Produce a detailed 5-day Design Sprint plan with the following structure:
 - Swarm: Everyone solves the same part
 - Facilitator Guide: Decider chooses approach
 
-**11:20 AM - 12:00 PM: Note-Taking (Individual Work)**
+**11:20 AM - 12:00 PM: Note-Taking (Individual Work)
 - Activity: Silent individual note-taking
 - Walk around room, review map and HMW notes
 - Jot down ideas on paper
 
 **12:00 PM - 1:00 PM: Lunch Break**
 
-**1:00 PM - 1:20 PM: Crazy 8s (Individual Work)**
+**1:00 PM - 1:20 PM: Crazy 8s (Individual Work)
 - Activity: Rapid-fire sketching
 - Fold paper into 8 panels
 - Sketch 8 variations in 8 minutes (1 per minute)
@@ -401,7 +416,7 @@ Produce a detailed 5-day Design Sprint plan with the following structure:
 
 **1:20 PM - 1:30 PM: Break**
 
-**1:30 PM - 3:30 PM: Solution Sketch (Individual Work)**
+**1:30 PM - 3:30 PM: Solution Sketch (Individual Work)
 - Activity: Detailed solution sketch
 - Format: 3-panel storyboard or multi-panel flow
 - Requirements:

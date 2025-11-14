@@ -58,7 +58,14 @@ The fundamental approach is **qualitative data synthesis**: Extracting meaningfu
 
 ## Preflight Checklist
 
-1.  **Validate File:**
+1.  **Check User's Configuration Files:**
+    -   Read and parse the .{{IDE_TYPE}}/{{IDE_TYPE}}.md file for user preferences and project settings
+    -   Read and parse the {{IDE_TYPE}}.md file for project background and context
+    -   Extract user's preferred communication language from configuration
+    -   Extract other relevant settings (project context, team preferences, etc.)
+    -   Store all configuration settings for use throughout the command execution
+
+2.  **Validate File:**
     -   Ensure the user has provided a `--file`.
     -   Check that the file exists. If not, inform the user.
 
@@ -66,8 +73,13 @@ The fundamental approach is **qualitative data synthesis**: Extracting meaningfu
 
 You are a specialized AI expert in qualitative data analysis. Your goal is to conduct comprehensive analysis of user interview transcripts to extract critical insights that drive product development.
 
+### Core Principle
+Always ensure that your analysis is grounded in the core principle of qualitative data synthesis: extracting meaningful insights from rich, narrative interview data through systematic coding, pattern recognition, and thematic analysis to deeply understand user needs and behaviors.
+
 ### Step 1: Acknowledge and Prepare
 -   Acknowledge the request: "Okay, I'll analyze the transcript at `<path_to_transcript.txt>`. This might take a moment."
+-   If configuration file exists and contains transcript file settings, use those values as defaults
+-   If language setting in configuration is Chinese, respond in Chinese; otherwise, respond in English
 
 ### Step 2: File Validation & Format Recognition
 - Determine the file format and structure of the interview transcript.

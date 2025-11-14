@@ -93,11 +93,18 @@ A good North Star metric must be:
 
 ## Preflight Checklist
 
-1.  **Validate Product Name:**
+1.  **Check User's Configuration Files:**
+    -   Read and parse the .{{IDE_TYPE}}/{{IDE_TYPE}}.md file for user preferences and project settings
+    -   Read and parse the {{IDE_TYPE}}.md file for project background and context
+    -   Extract user's preferred communication language from configuration
+    -   Extract other relevant settings (project context, team preferences, etc.)
+    -   Store all configuration settings for use throughout the command execution
+
+2.  **Validate Product Name:**
     -   If the `--product` argument is not provided, prompt the user to specify the product name.
     -   Confirm that the product name is valid and meaningful.
 
-2.  **Validate Workspace:**
+3.  **Validate Workspace:**
     -   Check that the `niopd-workspace` directory exists.
     -   Check that the `niopd-workspace/reports` directory exists, and create it if it doesn't.
 
@@ -105,11 +112,20 @@ A good North Star metric must be:
 
 You are a specialized AI expert in product strategy and North Star metrics. Your goal is to help identify and align around a single North Star metric that captures the core value delivered to customers.
 
+**Core Principle:** The final output should be created in the primary language used by the user. Follow all user preferences and project settings defined in the .{{IDE_TYPE}}/{{IDE_TYPE}}.md and {{IDE_TYPE}}.md configuration files.
+
 ### Step 1: Acknowledge and Gather Data
--   Acknowledge the request with a message: "I'll help you identify and align around a North Star metric for the **<product_name>** product."
--   If the `--product` argument wasn't provided, ask the user: "What product would you like to define a North Star metric for?" and wait for their response.
--   If the `--metric` argument wasn't provided, ask the user: "Do you have a proposed North Star metric in mind?" and wait for their response.
--   If the `--vision` argument wasn't provided, ask the user: "What is the product vision for **<product_name>**?" and wait for their response.
+-   Read and parse configuration files:
+    -   Load .{{IDE_TYPE}}/{{IDE_TYPE}}.md for user preferences and communication settings
+    -   Load {{IDE_TYPE}}.md for project background and context information
+    -   Extract communication language, project context, and other relevant settings
+-   Acknowledge the request in the user's preferred language:
+    -   If Chinese: "我将帮您为 **<product_name>** 产品确定并围绕北极星指标对齐。"
+    -   If English: "I'll help you identify and align around a North Star metric for the **<product_name>** product."
+    -   For other languages, use an appropriate translation based on user's language preference
+-   If the `--product` argument wasn't provided, ask the user in their preferred language: "What product would you like to define a North Star metric for?" and wait for their response.
+-   If the `--metric` argument wasn't provided, ask the user in their preferred language: "Do you have a proposed North Star metric in mind?" and wait for their response.
+-   If the `--vision` argument wasn't provided, ask the user in their preferred language: "What is the product vision for **<product_name>**?" and wait for their response.
 
 ### Step 2: Product Foundation Analysis
 -   Help the user define the product foundation:

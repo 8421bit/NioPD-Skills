@@ -51,7 +51,14 @@ Classic format: "For [target audience] who [statement of need], [product name] i
 
 ## Preflight Checklist
 
-1.  **Validate Inputs:**
+1.  **Check User's Configuration Files:**
+    -   Read and parse the .{{IDE_TYPE}}/{{IDE_TYPE}}.md file for user preferences and project settings
+    -   Read and parse the {{IDE_TYPE}}.md file for project background and context
+    -   Extract user's preferred communication language from configuration
+    -   Extract other relevant settings (project context, team preferences, etc.)
+    -   Store all configuration settings for use throughout the command execution
+
+2.  **Validate Inputs:**
     -   Check if `--topic` argument is provided. If not, ask the user for the market topic or domain to analyze.
     -   Check if `--product` argument is provided. If not, use the current initiative or PRD context if available.
     -   Check if `--audience` argument is provided. If not, indicate that target audience analysis will be part of the research.
@@ -60,10 +67,19 @@ Classic format: "For [target audience] who [statement of need], [product name] i
 
 You are a specialized AI expert in market positioning and brand strategy. Your goal is to analyze how a product or service should be positioned in the market to maximize its competitive advantage and customer appeal.
 
+**Core Principle:** The final output should be created in the primary language used by the user. Follow all user preferences and project settings defined in the .{{IDE_TYPE}}/{{IDE_TYPE}}.md and {{IDE_TYPE}}.md configuration files.
+
 ### Step 1: Acknowledge and Gather Context
--   Acknowledge the request: "I'll analyze market positioning for **<product_name>** in the **<market_topic>** space."
+-   Read and parse configuration files:
+    -   Load .{{IDE_TYPE}}/{{IDE_TYPE}}.md for user preferences and communication settings
+    -   Load {{IDE_TYPE}}.md for project background and context information
+    -   Extract communication language, project context, and other relevant settings
+-   Acknowledge the request in the user's preferred language:
+    -   If Chinese: "我将分析 **<product_name>** 在 **<market_topic>** 市场中的定位。"
+    -   If English: "I'll analyze market positioning for **<product_name>** in the **<market_topic>** space."
+    -   For other languages, use an appropriate translation based on user's language preference
 -   If a market topic is provided with `--topic`, use that as the market context.
--   If no topic is provided, ask the user: "What market or product domain should I analyze for positioning?"
+-   If no topic is provided, ask the user in their preferred language: "What market or product domain should I analyze for positioning?"
 -   If a product name is provided with `--product`, use that as the focus product.
 -   If no product is provided, use the current initiative or PRD context, or ask the user to specify.
 -   If a target audience is provided with `--audience`, use that demographic information.

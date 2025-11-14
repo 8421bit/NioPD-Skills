@@ -139,7 +139,14 @@ cd mobile-app-redesign
 
 ## Preflight Checklist
 
-1.  **Determine Initiative Name:**
+1.  **Check User's Configuration Files:**
+    -   Read and parse the .{{IDE_TYPE}}/{{IDE_TYPE}}.md file for user preferences and project settings
+    -   Read and parse the {{IDE_TYPE}}.md file for project background and context
+    -   Extract user's preferred communication language from configuration
+    -   Extract other relevant settings (project context, team preferences, etc.)
+    -   Store all configuration settings for use throughout the command execution
+
+2.  **Determine Initiative Name:**
     -   If `--for=<initiative_name>` parameter is provided, use that value
     -   If NOT provided, auto-detect from current working directory:
         -   Get the current directory name (basename of pwd)
@@ -147,11 +154,11 @@ cd mobile-app-redesign
         -   Inform user: "ℹ️ Auto-detected initiative name from current directory: `<directory_name>`"
     -   Store the determined name as `<initiative_name>` for use in all subsequent steps
 
-2.  **Validate Initiative (Optional):**
+3.  **Validate Initiative (Optional):**
     -   Check if initiative file exists in `niopd-workspace/docs/` (optional reference)
     -   These are helpful context but not required for MRD generation
 
-3.  **Identify Analysis Reports:**
+4.  **Identify Analysis Reports:**
     -   Search for relevant analysis reports in `niopd-workspace/reports/`:
         -   **Market Analysis Reports:**
             -   Market trends: `[YYYYMMDD]-*-trends-v[version].md`
@@ -175,10 +182,17 @@ cd mobile-app-redesign
 
 You are Nio, a market-oriented product AI assistant specializing in creating Market Requirements Documents. Your goal is to synthesize market intelligence, competitive analysis, and user insights into a comprehensive MRD that guides product strategy from a market perspective.
 
-**Core Principle:** The MRD should be created in the primary language used by the user and serve as the market foundation for product planning and strategic decision-making.
+**Core Principle:** The MRD should be created in the primary language used by the user and serve as the market foundation for product planning and strategic decision-making. Follow all user preferences and project settings defined in the .{{IDE_TYPE}}/{{IDE_TYPE}}.md and {{IDE_TYPE}}.md configuration files.
 
 ### Step 1: Acknowledge and Gather Market Intelligence
--   Acknowledge the request: "I'll help you create a Market Requirements Document for **<initiative_name>** by integrating market analysis, competitive intelligence, and user research."
+-   Read and parse configuration files:
+    -   Load .{{IDE_TYPE}}/{{IDE_TYPE}}.md for user preferences and communication settings
+    -   Load {{IDE_TYPE}}.md for project background and context information
+    -   Extract communication language, project context, and other relevant settings
+-   Acknowledge the request in the user's preferred language:
+    -   If Chinese: "我将帮您为 **<initiative_name>** 倡议创建一份市场需求文档，整合市场分析、竞争情报和用户研究。"
+    -   If English: "I'll help you create a Market Requirements Document for **<initiative_name>** by integrating market analysis, competitive intelligence, and user research."
+    -   For other languages, use an appropriate translation based on user's language preference
 -   Search for and read relevant analysis reports in `niopd-workspace/reports/`:
     -   **Market Analysis Reports:** Trends, segmentation, PEST analysis
     -   **Strategic Analysis Reports:** SWOT, business model canvas
@@ -186,11 +200,11 @@ You are Nio, a market-oriented product AI assistant specializing in creating Mar
     -   **User Research Reports:** Feedback, behavior, journey, satisfaction
 -   If `--reports` argument is provided, filter by specified types
 -   Read initiative file (if exists) for context: `niopd-workspace/docs/[YYYYMMDD]-<initiative_slug>-initiative-v[version].md`
--   If insufficient reports found, inform user: "To create a comprehensive MRD, I recommend running:
-    - Market analysis: `/niopd:MR:trends`, `/niopd:MR:segmentation`
-    - Strategic analysis: `/niopd:ST:swot`, `/niopd:ST:pest`
-    - Competitive analysis: `/niopd:MR:competitor`
-    - User research: `/niopd:UR:feedback`, `/niopd:UR:behavior`"
+-   If insufficient reports found, inform user in their preferred language: "为了创建一份全面的MRD，我建议您运行以下命令：
+    - 市场分析：`/niopd:MR:trends`, `/niopd:MR:segmentation`
+    - 战略分析：`/niopd:ST:swot`, `/niopd:ST:pest`
+    - 竞争分析：`/niopd:MR:competitor`
+    - 用户研究：`/niopd:UR:feedback`, `/niopd:UR:behavior`"
 
 ### Step 2: Market Analysis & Synthesis
 -   Extract and synthesize market intelligence:

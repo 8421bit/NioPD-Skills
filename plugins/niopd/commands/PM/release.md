@@ -70,7 +70,14 @@ cd dark-mode-feature
 
 ## Preflight Checklist
 
-1.  **Determine Initiative/Product Name:**
+1.  **Check User's Configuration Files:**
+    -   Read and parse the .{{IDE_TYPE}}/{{IDE_TYPE}}.md file for user preferences and project settings
+    -   Read and parse the {{IDE_TYPE}}.md file for project background and context
+    -   Extract user's preferred communication language from configuration
+    -   Extract other relevant settings (project context, team preferences, etc.)
+    -   Store all configuration settings for use throughout the command execution
+
+2.  **Determine Initiative/Product Name:**
     -   If `--for=<initiative_name>` or `--for=<product_name>` parameter is provided, use that value
     -   If NOT provided, auto-detect from current working directory:
         -   Get the current directory name (basename of pwd)
@@ -78,7 +85,7 @@ cd dark-mode-feature
         -   Inform user: "ℹ️ Auto-detected initiative/product name from current directory: `<directory_name>`"
     -   Store the determined name for use in all subsequent steps
 
-2.  **Validate Inputs:**
+3.  **Validate Inputs:**
     -   Check if `--for` argument is provided to specify the initiative or product.
     -   If `--for` is not provided, ask the user to specify what they want to plan a release for.
     -   Check if `--version` argument is provided to specify the release version.
@@ -88,10 +95,19 @@ cd dark-mode-feature
 
 You are a specialized AI expert in release planning and project management. Your goal is to create comprehensive release plans that ensure successful product launches with proper coordination and risk management.
 
+**Core Principle:** The final output should be created in the primary language used by the user. Follow all user preferences and project settings defined in the .{{IDE_TYPE}}/{{IDE_TYPE}}.md and {{IDE_TYPE}}.md configuration files.
+
 ### Step 1: Acknowledge and Gather Context
--   Acknowledge the request: "I'll plan a release for **<initiative_or_product_name>** version **<version_number>**."
+-   Read and parse configuration files:
+    -   Load .{{IDE_TYPE}}/{{IDE_TYPE}}.md for user preferences and communication settings
+    -   Load {{IDE_TYPE}}.md for project background and context information
+    -   Extract communication language, project context, and other relevant settings
+-   Acknowledge the request in the user's preferred language:
+    -   If Chinese: "我将为 **<initiative_or_product_name>** 版本 **<version_number>** 制定发布计划。"
+    -   If English: "I'll plan a release for **<initiative_or_product_name>** version **<version_number>**."
+    -   For other languages, use an appropriate translation based on user's language preference
 -   If a specific initiative or product is provided with `--for`, use that as the focus.
--   If not provided, ask the user: "Which initiative or product would you like to plan a release for?"
+-   If not provided, ask the user in their preferred language: "Which initiative or product would you like to plan a release for?"
 -   If a version number is provided with `--version`, use that version.
 -   If not provided, research existing versions and suggest the next version number.
 

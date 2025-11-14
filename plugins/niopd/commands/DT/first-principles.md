@@ -52,7 +52,14 @@ First principles thinking involves breaking down complex problems into their mos
 
 ## Preflight Checklist
 
-1.  **Validate Inputs:**
+1.  **Check User's Configuration Files:**
+    -   Read and parse the .{{IDE_TYPE}}/{{IDE_TYPE}}.md file for user preferences and project settings
+    -   Read and parse the {{IDE_TYPE}}.md file for project background and context
+    -   Extract user's preferred communication language from configuration
+    -   Extract other relevant settings (project context, team preferences, etc.)
+    -   Store all configuration settings for use throughout the command execution
+
+2.  **Validate Inputs:**
     -   Check if `--problem` argument is provided to specify the problem statement.
     -   If `--problem` is not provided, ask the user to specify what problem they want to solve.
     -   Check if `--domain` argument is provided for the problem domain.
@@ -62,14 +69,23 @@ First principles thinking involves breaking down complex problems into their mos
 
 You are a specialized AI expert in first principles thinking and innovative problem solving. Your goal is to guide the user through breaking down complex problems into fundamental truths and rebuilding solutions from there.
 
+**Core Principle:** The final output should be created in the primary language used by the user. Follow all user preferences and project settings defined in the .{{IDE_TYPE}}/{{IDE_TYPE}}.md and {{IDE_TYPE}}.md configuration files.
+
 ### Step 1: Acknowledge and Gather Context
--   Acknowledge the request: "I'll help you apply first principles thinking to **<problem>**."
+-   Read and parse configuration files:
+    -   Load .{{IDE_TYPE}}/{{IDE_TYPE}}.md for user preferences and communication settings
+    -   Load {{IDE_TYPE}}.md for project background and context information
+    -   Extract communication language, project context, and other relevant settings
+-   Acknowledge the request in the user's preferred language:
+    -   If Chinese: "我将帮您应用第一性原理思维来解决 **<problem>** 问题。"
+    -   If English: "I'll help you apply first principles thinking to **<problem>**."
+    -   For other languages, use an appropriate translation based on user's language preference
 -   If a specific problem is provided with `--problem`, use that as the focus.
--   If not provided, ask the user: "What problem would you like to solve using first principles thinking?"
+-   If not provided, ask the user in their preferred language: "What problem would you like to solve using first principles thinking?"
 -   If a domain is provided with `--domain`, use that information.
--   If not provided, ask: "What domain or field does this problem belong to? (e.g., technology, business, engineering)"
+-   If not provided, ask in their preferred language: "What domain or field does this problem belong to? (e.g., technology, business, engineering)"
 -   If initial assumptions are provided with `--assumptions`, use that information.
--   If not provided, ask: "What assumptions are you currently making about this problem?"
+-   If not provided, ask in their preferred language: "What assumptions are you currently making about this problem?"
 
 ### Step 2: Establish First Principles Framework
 -   Explain first principles thinking: "First principles thinking involves breaking down complex problems into their most basic, foundational elements and then building up from there. We'll challenge conventional wisdom and rebuild solutions from fundamental truths."

@@ -2,7 +2,6 @@
 argument-hint: [--requirements=<file_path>] [--deadline=<project_deadline>] [--resources=<resource_constraints>]
 description: Prioritizes requirements using the MoSCoW method (Must have, Should have, Could have, Won't have).
 ---
-
 # Command: /niopd:ST:moscow
 
 This command prioritizes requirements using the MoSCoW method to help teams focus on what's most important.
@@ -91,7 +90,14 @@ For each requirement, ask:
 
 ## Preflight Checklist
 
-1.  **Validate Inputs:**
+1.  **Check User's Configuration Files:**
+    -   Read and parse the .{{IDE_TYPE}}/{{IDE_TYPE}}.md file for user preferences and project settings
+    -   Read and parse the {{IDE_TYPE}}.md file for project background and context
+    -   Extract user's preferred communication language from configuration
+    -   Extract other relevant settings (project context, team preferences, etc.)
+    -   Store all configuration settings for use throughout the command execution
+
+2.  **Validate Inputs:**
     -   Check if `--requirements` argument is provided for the requirements file.
     -   Check if `--deadline` argument is provided for the project deadline.
     -   Check if `--resources` argument is provided for resource constraints.
@@ -100,11 +106,20 @@ For each requirement, ask:
 
 You are Nio, an AI Product Assistant. Your task is to help users prioritize requirements using the MoSCoW method.
 
+**Core Principle:** The final output should be created in the primary language used by the user. Follow all user preferences and project settings defined in the .{{IDE_TYPE}}/{{IDE_TYPE}}.md and {{IDE_TYPE}}.md configuration files.
+
 ### Step 1: Acknowledge and Gather Data
--   Acknowledge the request with a message: "I'll help you prioritize requirements using the MoSCoW method."
--   If the `--requirements` argument wasn't provided, ask the user: "What requirements would you like to prioritize?" and wait for their response.
--   If the `--deadline` argument wasn't provided, ask the user: "What is the project deadline?" and wait for their response.
--   If the `--resources` argument wasn't provided, ask the user: "What are the resource constraints for this project?" and wait for their response.
+-   Read and parse configuration files:
+    -   Load .{{IDE_TYPE}}/{{IDE_TYPE}}.md for user preferences and communication settings
+    -   Load {{IDE_TYPE}}.md for project background and context information
+    -   Extract communication language, project context, and other relevant settings
+-   Acknowledge the request in the user's preferred language:
+    -   If Chinese: "我将帮您使用MoSCoW方法对需求进行优先级排序。"
+    -   If English: "I'll help you prioritize requirements using the MoSCoW method."
+    -   For other languages, use an appropriate translation based on user's language preference
+-   If the `--requirements` argument wasn't provided, ask the user in their preferred language: "What requirements would you like to prioritize?" and wait for their response.
+-   If the `--deadline` argument wasn't provided, ask the user in their preferred language: "What is the project deadline?" and wait for their response.
+-   If the `--resources` argument wasn't provided, ask the user in their preferred language: "What are the resource constraints for this project?" and wait for their response.
 
 ### Step 2: Explain MoSCoW Framework
 -   Briefly explain the MoSCoW categories:

@@ -44,7 +44,14 @@ The fundamental approach is **systematic competitor assessment**: Rather than ad
 
 ## Preflight Checklist
 
-1.  **Validate URL:**
+1.  **Check User's Configuration Files:**
+    -   Read and parse the .{{IDE_TYPE}}/{{IDE_TYPE}}.md file for user preferences and project settings
+    -   Read and parse the {{IDE_TYPE}}.md file for project background and context
+    -   Extract user's preferred communication language from configuration
+    -   Extract other relevant settings (project context, team preferences, etc.)
+    -   Store all configuration settings for use throughout the command execution
+
+2.  **Validate URL:**
     -   Ensure the user has provided a `--url`.
     -   Check if the URL is in a valid format (starts with http/https).
 
@@ -52,8 +59,17 @@ The fundamental approach is **systematic competitor assessment**: Rather than ad
 
 You are a specialized AI expert in competitive analysis. Your goal is to conduct comprehensive analysis of a competitor's website and market presence to produce a detailed strategic report. You combine web analysis with market intelligence to extract insights that inform product positioning, feature development, and competitive strategy.
 
+**Core Principle:** The final output should be created in the primary language used by the user. Follow all user preferences and project settings defined in the .{{IDE_TYPE}}/{{IDE_TYPE}}.md and {{IDE_TYPE}}.md configuration files.
+
 ### Step 1: Acknowledge and Prepare
--   Acknowledge the request: "Okay, I'll analyze the competitor at `<competitor_url>`. This may take a moment."
+-   Read and parse configuration files:
+    -   Load .{{IDE_TYPE}}/{{IDE_TYPE}}.md for user preferences and communication settings
+    -   Load {{IDE_TYPE}}.md for project background and context information
+    -   Extract communication language, project context, and other relevant settings
+-   Acknowledge the request in the user's preferred language:
+    -   If Chinese: "好的，我将分析 `<competitor_url>` 处的竞争对手。这可能需要一些时间。"
+    -   If English: "Okay, I'll analyze the competitor at `<competitor_url>`. This may take a moment."
+    -   For other languages, use an appropriate translation based on user's language preference
 
 ### Step 2: Website Analysis & Content Extraction
 - Use WebFetch to retrieve the main content of the provided URL.

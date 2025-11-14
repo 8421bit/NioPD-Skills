@@ -34,7 +34,7 @@
 
 ## 🎯 什么是 NioPD？
 
-**NioPD (Nio Product Director)** 是一个为 Claude Code 设计的产品管理工具包，集成了70个智能化指令，覆盖从商业战略规划到产品交付运营的完整流程。
+**NioPD (Nio Product Director)** 是一个为 Claude Code 设计的产品管理工具包，集成了73个智能化指令，覆盖从商业战略规划到产品交付运营的完整流程。
 
 ### 🌟 不仅仅是工具，更是您的 AI 产品管理伙伴
 
@@ -69,7 +69,7 @@ NioPD 通过以下方式改变产品经理的工作方式：
 
 这种方式让您不仅能完成任务，更能 **提升产品思维能力**，做出 **更明智的决策**。
 
-### 💯 **70 个智能化指令覆盖 9 大领域**
+### 💯 **73 个智能化指令覆盖 9 大领域**
 
 | 领域 | 缩写 | 指令数 | 核心功能 |
 |------|------|---------|----------|
@@ -1148,6 +1148,7 @@ NioPD 建立了完整的产品文档层级，确保从市场到产品的无缝�
 | `/niopd:PD:roadmap` | 生成产品路线图 | `docs/` | Roadmap |
 | `/niopd:PD:acceptance-criteria` | 详细验收标准 | `docs/` | Acceptance Criteria |
 | `/niopd:PD:experiment` | 实验设计文档 | `docs/` | Experiment Design |
+| `/niopd:PD:integrate` | 集成分析报告到PRD | `docs/` | Integrated Insights |
 
 #### 🔑 核心指令详解
 
@@ -1316,6 +1317,31 @@ NioPD 建立了完整的产品文档层级，确保从市场到产品的无缝�
   - 用户行为研究
   - 优化决策
 - **交付物**：`docs/[date]-experiment-design.md`
+
+**`/niopd:PD:integrate`** - 集成分析报告
+- **功能**：将市场、用户和战略分析报告集成到现有PRD中
+- **理论基础**：数据驱动的产品管理，用多源证据增强需求质量
+- **集成内容**：
+  - 市场研究报告（趋势、细分、竞争分析）
+  - 用户研究洞察（反馈、行为、满意度）
+  - 战略分析结论（SWOT、PEST、商业模式）
+- **使用场景**：
+  - 增强PRD的数据支撑
+  - 在新研究可用时更新需求
+  - 提高需求决策的可信度
+- **特色功能**：
+  - 智能匹配：自动识别相关报告并映射到PRD结构
+  - 选择性集成：只集成相关和有价值的洞察
+  - 版本追踪：记录集成的报告版本和来源
+  - 上下文增强：在需求中添加背景和理由
+- **交付物**：`docs/[YYYYMMDD]-<initiative>-prd-v[version].md` (更新的PRD)
+- **示例**：
+  ```bash
+  /niopd:PD:integrate --for="dark-mode-feature"
+  # 或自动检测当前目录
+  cd dark-mode-feature
+  /niopd:PD:integrate
+  ```
 
 ---
 

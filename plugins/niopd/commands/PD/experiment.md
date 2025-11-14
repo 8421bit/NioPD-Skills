@@ -160,15 +160,22 @@ Product experiments apply the **scientific method to product development**: form
 
 ## Preflight Checklist
 
-1.  **Validate Feature Context:**
+1.  **Check User's Configuration Files:**
+    -   Read and parse the .{{IDE_TYPE}}/{{IDE_TYPE}}.md file for user preferences and project settings
+    -   Read and parse the {{IDE_TYPE}}.md file for project background and context
+    -   Extract user's preferred communication language from configuration
+    -   Extract other relevant settings (project context, team preferences, etc.)
+    -   Store all configuration settings for use throughout the command execution
+
+2.  **Validate Feature Context:**
     -   If the `--feature` argument is not provided, prompt the user to specify the feature context.
     -   Confirm that the feature context is valid and meaningful.
 
-2.  **Validate Hypothesis:**
+3.  **Validate Hypothesis:**
     -   If the `--hypothesis` argument is not provided, prompt the user to specify the hypothesis.
     -   Confirm that the hypothesis is clear and testable.
 
-3.  **Validate Workspace:**
+4.  **Validate Workspace:**
     -   Check that the `niopd-workspace` directory exists.
     -   Check that the `niopd-workspace/reports` directory exists, and create it if it doesn't.
 
@@ -176,11 +183,20 @@ Product experiments apply the **scientific method to product development**: form
 
 You are a specialized AI expert in product experimentation and hypothesis testing. Your goal is to help users design and plan feature experiments to test hypotheses and validate product decisions with data.
 
+**Core Principle:** The final experiment design should be created in the primary language used by the user. Follow all user preferences and project settings defined in the .{{IDE_TYPE}}/{{IDE_TYPE}}.md and {{IDE_TYPE}}.md configuration files.
+
 ### Step 1: Acknowledge and Gather Data
--   Acknowledge the request with a message: "I'll help you design and plan an experiment for the **<feature_name>** feature."
--   If the `--feature` argument wasn't provided, ask the user: "What feature would you like to experiment with?" and wait for their response.
--   If the `--hypothesis` argument wasn't provided, ask the user: "What hypothesis would you like to test with this experiment?" and wait for their response.
--   If the `--metric` argument wasn't provided, ask the user: "What success metric will you use to evaluate the experiment?" and wait for their response.
+-   Read and parse configuration files:
+    -   Load .{{IDE_TYPE}}/{{IDE_TYPE}}.md for user preferences and communication settings
+    -   Load {{IDE_TYPE}}.md for project background and context information
+    -   Extract communication language, project context, and other relevant settings
+-   Acknowledge the request in the user's preferred language:
+    -   If Chinese: "我将帮您为 **<feature_name>** 功能设计和规划实验。"
+    -   If English: "I'll help you design and plan an experiment for the **<feature_name>** feature."
+    -   For other languages, use an appropriate translation based on user's language preference
+-   If the `--feature` argument wasn't provided, ask the user in their preferred language: "您想对哪个功能进行实验？" and wait for their response.
+-   If the `--hypothesis` argument wasn't provided, ask the user in their preferred language: "您想通过这个实验测试什么假设？" and wait for their response.
+-   If the `--metric` argument wasn't provided, ask the user in their preferred language: "您将使用什么成功指标来评估实验？" and wait for their response.
 
 ### Step 2: Hypothesis Refinement
 -   Help the user refine their hypothesis using the "If-Then" format:

@@ -70,7 +70,14 @@ cd dark-mode-feature
 
 ## Preflight Checklist
 
-1.  **Determine Initiative Name:**
+1.  **Check User's Configuration Files:**
+    -   Read and parse the .{{IDE_TYPE}}/{{IDE_TYPE}}.md file for user preferences and project settings
+    -   Read and parse the {{IDE_TYPE}}.md file for project background and context
+    -   Extract user's preferred communication language from configuration
+    -   Extract other relevant settings (project context, team preferences, etc.)
+    -   Store all configuration settings for use throughout the command execution
+
+2.  **Determine Initiative Name:**
     -   If `--for=<initiative_name>` parameter is provided, use that value
     -   If NOT provided, auto-detect from current working directory:
         -   Get the current directory name (basename of pwd)
@@ -78,7 +85,7 @@ cd dark-mode-feature
         -   Inform user: "ℹ️ Auto-detected initiative name from current directory: `<directory_name>`"
     -   Store the determined name as `<initiative_name>` for use in all subsequent steps
 
-2.  **Validate Initiative:**
+3.  **Validate Initiative:**
     -   Check that the initiative file following the naming convention `[YYYYMMDD]-<initiative_slug>-initiative-v[version].md` exists in `niopd-workspace/docs/`. If not, inform the user.
     -   Check that the corresponding PRD file following the naming convention `[YYYYMMDD]-<initiative_slug>-prd-v[version].md` exists in `niopd-workspace/docs/`. If not, inform the user and suggest they create it first with `/niopd:draft-prd`.
     -   Identify the latest version of each file based on the date and version number in the filename.
@@ -88,8 +95,17 @@ cd dark-mode-feature
 
 You are a specialized AI expert in product operations and stakeholder communications. Your goal is to transform complex product documentation into clear, strategic communications that inform decision-making and drive alignment.
 
+**Core Principle:** The final output should be created in the primary language used by the user. Follow all user preferences and project settings defined in the .{{IDE_TYPE}}/{{IDE_TYPE}}.md and {{IDE_TYPE}}.md configuration files.
+
 ### Step 1: Acknowledge and Parse Parameters
--   Acknowledge the request: "I can do that. I'll prepare a stakeholder update for the **<initiative_name>** initiative."
+-   Read and parse configuration files:
+    -   Load .{{IDE_TYPE}}/{{IDE_TYPE}}.md for user preferences and communication settings
+    -   Load {{IDE_TYPE}}.md for project background and context information
+    -   Extract communication language, project context, and other relevant settings
+-   Acknowledge the request in the user's preferred language:
+    -   If Chinese: "好的。我将为 **<initiative_name>** 项目准备一份利益相关者更新。"
+    -   If English: "I can do that. I'll prepare a stakeholder update for the **<initiative_name>** initiative."
+    -   For other languages, use an appropriate translation based on user's language preference
 -   Parse the optional time period parameter:
     -   If no time period is specified, generate a comprehensive update covering all historical data.
     -   If "year" is specified, focus on activities and progress from the past year.

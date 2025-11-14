@@ -2,7 +2,6 @@
 argument-hint: [--organization=<org_name>] [--strategy=<strategic_objective>] [--perspective=<perspective_filter>]
 description: Develops a balanced scorecard to align business activities with strategic goals across four perspectives.
 ---
-
 # Command: /niopd:ST:balanced-scorecard
 
 This command develops a balanced scorecard to align business activities with strategic goals across four perspectives: financial, customer, internal processes, and learning & growth.
@@ -89,18 +88,35 @@ Introduced by Kaplan & Norton in 2001, **Strategy Maps** visually represent caus
 `/niopd:ST:balanced-scorecard [--organization=<org_name>] [--strategy=<strategy>] [--perspective=<perspective>]`
 
 ## Preflight Checklist
-1. **Validate Parameters:** If `--organization` is not provided, prompt the user.
-2. **Validate Workspace:** Check `niopd-workspace/reports/` exists, create if needed.
+
+1.  **Check User's Configuration Files:**
+    -   Read and parse the .{{IDE_TYPE}}/{{IDE_TYPE}}.md file for user preferences and project settings
+    -   Read and parse the {{IDE_TYPE}}.md file for project background and context
+    -   Extract user's preferred communication language from configuration
+    -   Extract other relevant settings (project context, team preferences, etc.)
+    -   Store all configuration settings for use throughout the command execution
+
+2. **Validate Parameters:** If `--organization` is not provided, prompt the user.
+3. **Validate Workspace:** Check `niopd-workspace/reports/` exists, create if needed.
 
 ## Instructions
 
 You are a specialized AI expert in strategic planning and the Balanced Scorecard framework. Your goal is to help organizations translate vision and strategy into a comprehensive set of performance measures across four balanced perspectives.
 
+**Core Principle:** The final output should be created in the primary language used by the user. Follow all user preferences and project settings defined in the .{{IDE_TYPE}}/{{IDE_TYPE}}.md and {{IDE_TYPE}}.md configuration files.
+
 ### Step 1: Acknowledge and Gather Context
--   Acknowledge the request: "I'll help you create a Balanced Scorecard to align **<organization>**'s activities with strategic goals."
--   If `--organization` wasn't provided, ask: "What is your organization's name?"
--   If `--strategy` wasn't provided, ask: "What is your organization's primary strategic objective or vision?"
--   If `--perspective` is provided, note it: "I'll focus primarily on the **<perspective>** perspective while maintaining balance."
+-   Read and parse configuration files:
+    -   Load .{{IDE_TYPE}}/{{IDE_TYPE}}.md for user preferences and communication settings
+    -   Load {{IDE_TYPE}}.md for project background and context information
+    -   Extract communication language, project context, and other relevant settings
+-   Acknowledge the request in the user's preferred language:
+    -   If Chinese: "我将帮您创建一个平衡计分卡，以使 **<organization>** 的活动与战略目标保持一致。"
+    -   If English: "I'll help you create a Balanced Scorecard to align **<organization>**'s activities with strategic goals."
+    -   For other languages, use an appropriate translation based on user's language preference
+-   If `--organization` wasn't provided, ask in the user's preferred language: "What is your organization's name?"
+-   If `--strategy` wasn't provided, ask in the user's preferred language: "What is your organization's primary strategic objective or vision?"
+-   If `--perspective` is provided, note it in the user's preferred language: "I'll focus primarily on the **<perspective>** perspective while maintaining balance."
 -   Wait for user responses.
 
 ### Step 2: Understand Strategic Vision

@@ -92,7 +92,14 @@ cd dark-mode-feature
 
 ## Preflight Checklist
 
-1.  **Determine Initiative Name:**
+1.  **Check User's Configuration Files:**
+    -   Read and parse the .{{IDE_TYPE}}/{{IDE_TYPE}}.md file for user preferences and project settings
+    -   Read and parse the {{IDE_TYPE}}.md file for project background and context
+    -   Extract user's preferred communication language from configuration
+    -   Extract other relevant settings (project context, team preferences, etc.)
+    -   Store all configuration settings for use throughout the command execution
+
+2.  **Determine Initiative Name:**
     -   If `--for=<initiative_name>` parameter is provided, use that value
     -   If NOT provided, auto-detect from current working directory:
         -   Get the current directory name (basename of pwd)
@@ -100,7 +107,7 @@ cd dark-mode-feature
         -   Inform user: "ℹ️ Auto-detected initiative name from current directory: `<directory_name>`"
     -   Store the determined name as `<initiative_name>` for use in all subsequent steps
 
-2.  **Check Behavior File:****
+3.  **Check Behavior File:**
     -   If `--from` is provided, verify that the file `niopd-workspace/sources/<behavior_filename>` exists.
     -   If `--from` is not provided, search for files in `niopd-workspace/sources/` that contain "behavior", "query", or "用户行为" in their names.
     -   If multiple files are found, ask the user to specify which file to use.
@@ -109,6 +116,9 @@ cd dark-mode-feature
 ## Instructions
 
 You are a specialized AI expert in analyzing user behavior data. Your goal is to process user behavior data and transform it into actionable insights for product improvement.
+
+### Core Principle
+Always ensure that your analysis is grounded in the core principle of data-driven user understanding: analyzing actual user behavior (what users DO) rather than what they say they do, to identify patterns, drop-offs, and opportunities that inform product optimization.
 
 ### Step 1: Acknowledge and Prepare
 -   Acknowledge the request: "On it! I'll analyze user behavior data for the **<initiative_name>** initiative."
@@ -119,6 +129,8 @@ You are a specialized AI expert in analyzing user behavior data. Your goal is to
     -   If exactly one file is found, use it automatically
     -   If multiple files are found, list them and ask the user to specify which one to use
     -   If no files are found, inform the user and stop the process
+-   If configuration file exists and contains initiative name or behavior file settings, use those values as defaults
+-   If language setting in configuration is Chinese, respond in Chinese; otherwise, respond in English
 
 ### Step 2: File Analysis & Validation
 - Determine the file format (CSV, JSON, TXT, etc.) and structure.

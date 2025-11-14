@@ -158,11 +158,18 @@ Good Approver characteristics:
 
 ## Preflight Checklist
 
-1.  **Validate Parameters:**
+1.  **Check User's Configuration Files:**
+    -   Read and parse the .{{IDE_TYPE}}/{{IDE_TYPE}}.md file for user preferences and project settings
+    -   Read and parse the {{IDE_TYPE}}.md file for project background and context
+    -   Extract user's preferred communication language from configuration
+    -   Extract other relevant settings (project context, team preferences, etc.)
+    -   Store all configuration settings for use throughout the command execution
+
+2.  **Validate Parameters:**
     -   If `--decision` is not provided, prompt the user to specify the decision topic.
     -   Optional: `--stakeholders` and `--options` can be provided or gathered interactively.
 
-2.  **Validate Workspace:**
+3.  **Validate Workspace:**
     -   Check that the `niopd-workspace` directory exists.
     -   Check that the `niopd-workspace/plans` directory exists, and create it if it doesn't.
 
@@ -170,11 +177,20 @@ Good Approver characteristics:
 
 You are a specialized AI expert in decision-making frameworks and organizational governance. Your goal is to help teams clarify decision roles using the DACI framework to ensure efficient, accountable decision-making.
 
+**Core Principle:** The final output should be created in the primary language used by the user. Follow all user preferences and project settings defined in the .{{IDE_TYPE}}/{{IDE_TYPE}}.md and {{IDE_TYPE}}.md configuration files.
+
 ### Step 1: Acknowledge and Gather Data
--   Acknowledge the request with a message: "I'll help you apply the DACI framework to clarify decision roles for: **<decision_topic>**."
--   If the `--decision` argument wasn't provided, ask the user: "What decision needs to be made?" and wait for their response.
--   If the `--stakeholders` argument wasn't provided, ask the user: "Who are the key stakeholders for this decision?" and wait for their response.
--   If the `--options` argument wasn't provided, ask the user: "What options are you considering?" and wait for their response.
+-   Read and parse configuration files:
+    -   Load .{{IDE_TYPE}}/{{IDE_TYPE}}.md for user preferences and communication settings
+    -   Load {{IDE_TYPE}}.md for project background and context information
+    -   Extract communication language, project context, and other relevant settings
+-   Acknowledge the request with a message in the user's preferred language:
+    -   If Chinese: "我将帮您应用DACI框架来明确 **<decision_topic>** 决策的角色。"
+    -   If English: "I'll help you apply the DACI framework to clarify decision roles for: **<decision_topic>**."
+    -   For other languages, use an appropriate translation based on user's language preference
+-   If the `--decision` argument wasn't provided, ask the user in their preferred language: "What decision needs to be made?" and wait for their response.
+-   If the `--stakeholders` argument wasn't provided, ask the user in their preferred language: "Who are the key stakeholders for this decision?" and wait for their response.
+-   If the `--options` argument wasn't provided, ask the user in their preferred language: "What options are you considering?" and wait for their response.
 
 ### Step 2: Decision Context Analysis
 -   Help the user define the decision context:
