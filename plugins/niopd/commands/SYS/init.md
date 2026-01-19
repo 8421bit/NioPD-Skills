@@ -13,11 +13,11 @@ This command initializes a new NioPD workspace by creating the required director
 ## Preflight Checklist
 
 1.  **Check Current Directory:**
-    -   Verify that the current directory contains a `.{{IDE_TYPE}}` directory.
-    -   If not, inform the user: "❌ Error: This command must be run from the root of a project that contains the `.{{IDE_TYPE}}` directory."
+    -   Verify that the current directory contains a `.claude` directory.
+    -   If not, inform the user: "❌ Error: This command must be run from the root of a project that contains the `.claude` directory."
 
 2.  **Check Workspace Status:**
-    -   Check if `niopd-workspace/` directory already exists
+    -   Check if `01-sources/` directory already exists
     -   If exists, set mode to "organize" (整理模式)
     -   If not exists, set mode to "initialize" (初始化模式)
 
@@ -26,12 +26,12 @@ This command initializes a new NioPD workspace by creating the required director
 You are Nio, a friendly and efficient AI product assistant. Your goal is to help the user initialize the NioPD system.
 
 ### Step 1: Check Current Directory (Preflight)
--   Verify that the current directory contains a `.{{IDE_TYPE}}` directory
--   If not found, inform the user: "❌ Error: This command must be run from the root of a project that contains the `.{{IDE_TYPE}}` directory."
+-   Verify that the current directory contains a `.claude` directory
+-   If not found, inform the user: "❌ Error: This command must be run from the root of a project that contains the `.claude` directory."
 -   If found, proceed to Step 2
 
 ### Step 2: Check Workspace Status and Set Mode
--   Check if `niopd-workspace/` directory already exists
+-   Check if `01-sources/` directory already exists
 -   If workspace exists:
     -   Acknowledge: "I found an existing NioPD workspace. I'll organize and standardize your files according to NioPD specifications."
     -   Set mode to "organize"
@@ -42,38 +42,37 @@ You are Nio, a friendly and efficient AI product assistant. Your goal is to help
 ### Step 3: Create or Verify Directory Structure
 -   **If mode is "initialize":**
     -   Use the Bash tool to create the required directories:
-        -   `niopd-workspace/sources/` - For external data and brainstorming records (BS, DT)
-        -   `niopd-workspace/reports/` - For research and analysis reports (UR, MR, ST)
-        -   `niopd-workspace/docs/` - For product and operations documents (PD, PO)
-        -   `niopd-workspace/plans/` - For execution plans and project tracking (PM)
-    -   Execute the command: `mkdir -p niopd-workspace/sources niopd-workspace/reports niopd-workspace/docs niopd-workspace/plans`
-    -   **Check workspace root:**
-        -   Check if there are any files directly in `niopd-workspace/` (not in subdirectories)
+        -   `01-sources/` - For external data and brainstorming records (BS, DT)
+        -   `02-reports/` - For research and analysis reports (UR, MR, ST)
+        -   `03-docs/` - For product and operations documents (PD, PO)
+        -   `04-plans/` - For execution plans and project tracking (PM)
+    -   Execute the command: `mkdir -p 01-sources 02-reports 03-docs 04-plans`
+    -   **Check project root:**
+        -   Check if there are any files directly in project root that belong to NioPD
         -   Check if there are any non-standard subdirectories
         -   If found, proceed to Step 4 to organize them
 
 -   **If mode is "organize":**
     -   Verify all required directories exist:
-        -   `niopd-workspace/sources/`
-        -   `niopd-workspace/reports/`
-        -   `niopd-workspace/docs/`
-        -   `niopd-workspace/plans/`
+        -   `01-sources/`
+        -   `02-reports/`
+        -   `03-docs/`
+        -   `04-plans/`
     -   Create any missing directories
     -   Inform user: "✅ Verified directory structure. All required directories are present."
     -   Always proceed to Step 4 for cleanup
 
 ### Step 4: Clean Up Non-Standard Directories (For both modes if needed)
 -   **Check if cleanup is needed:**
-    -   For "initialize" mode: Only if workspace root or non-standard directories contain files
+    -   For "initialize" mode: Only if project root or non-standard directories contain files
     -   For "organize" mode: Always run this step
     -   If no files to organize and no non-standard directories, skip to Step 5
 
 -   **Scan existing files and directories:**
-    -   List all files in `niopd-workspace/` and subdirectories
-    -   List all directories in `niopd-workspace/`
+    -   List all files in project root and subdirectories
     -   Identify files that don't follow the naming convention: `[YYYYMMDD]-<identifier>-<document-type>-v[version].md`
     -   Identify files in wrong directories based on their type
-    -   Identify non-standard directories (directories other than `sources/`, `reports/`, `docs/`, `plans/`, and `.backup-*/`)
+    -   Identify non-standard directories (directories other than `01-sources/`, `02-reports/`, `03-docs/`, `04-plans/`, and `.backup-*/`)
 
 -   **Analyze and categorize files:**
     -   For each file, determine:
@@ -83,8 +82,8 @@ You are Nio, a friendly and efficient AI product assistant. Your goal is to help
     -   Create a reorganization plan
 
 -   **Identify directories to clean up:**
-    -   Standard directories to keep: `sources/`, `reports/`, `docs/`, `plans/`
-    -   System directories to preserve: `.backup-*/` (backup directories)
+    -   Standard directories to keep: `01-sources/`, `02-reports/`, `03-docs/`, `04-plans/`
+    -   System directories to preserve: `.backup-*/` (backup directories), `.claude/`, `.git/`
     -   List all other directories as "non-standard directories to remove"
     -   For each non-standard directory:
         -   Check if it contains any files
@@ -101,10 +100,10 @@ You are Nio, a friendly and efficient AI product assistant. Your goal is to help
     -   Ask for confirmation: "I've identified [N] files that need reorganization and [M] non-standard directories to remove. Would you like me to proceed with these changes? (yes/no)"
 
 -   **Execute reorganization (if user confirms):**
-    -   Create backup directory: `niopd-workspace/.backup-[YYYYMMDD-HHMMSS]/`
+    -   Create backup directory: `.backup-[YYYYMMDD-HHMMSS]/`
     -   Copy all files AND directory structure to backup before making changes
-    -   **Move files from workspace root** (if any):
-        -   Analyze each file in `niopd-workspace/` root
+    -   **Move files from project root** (if any):
+        -   Analyze each file in project root
         -   Categorize and move to appropriate standard directory
     -   Rename files according to standard naming convention:
         -   Extract or infer date (use file creation date if not in filename)
@@ -112,15 +111,15 @@ You are Nio, a friendly and efficient AI product assistant. Your goal is to help
         -   Extract or infer document type from content/location
         -   Determine version: v0 for first version, increment if multiple versions exist
     -   Move files to correct directories:
-        -   Business strategy, brainstorming → `sources/`
-        -   User research, market research, strategic analysis → `reports/`
-        -   PRDs, product docs, operation docs → `docs/`
-        -   Project plans, roadmaps, release plans → `plans/`
+        -   Business strategy, brainstorming → `01-sources/`
+        -   User research, market research, strategic analysis → `02-reports/`
+        -   PRDs, product docs, operation docs → `03-docs/`
+        -   Project plans, roadmaps, release plans → `04-plans/`
     -   **Remove non-standard directories:**
         -   First ensure all files from non-standard directories have been moved
         -   Delete empty non-standard directories
-        -   Keep only: `sources/`, `reports/`, `docs/`, `plans/`, and `.backup-*/`
-    -   Report progress: "✅ Reorganized [N] files, removed [M] non-standard directories. Backup saved to `niopd-workspace/.backup-[timestamp]/`"
+        -   Keep only: `01-sources/`, `02-reports/`, `03-docs/`, `04-plans/`, and `.backup-*/`
+    -   Report progress: "✅ Reorganized [N] files, removed [M] non-standard directories. Backup saved to `.backup-[timestamp]/`"
 
 -   **Handle edge cases:**
     -   If file type is ambiguous, ask user for clarification
@@ -130,10 +129,10 @@ You are Nio, a friendly and efficient AI product assistant. Your goal is to help
 
 ### Step 5: Check and Fix Document Naming Convention
 -   **Scan all files in standard directories:**
-    -   Check files in `niopd-workspace/sources/`
-    -   Check files in `niopd-workspace/reports/`
-    -   Check files in `niopd-workspace/docs/`
-    -   Check files in `niopd-workspace/plans/`
+    -   Check files in `01-sources/`
+    -   Check files in `02-reports/`
+    -   Check files in `03-docs/`
+    -   Check files in `04-plans/`
     -   Identify files that don't follow the naming convention: `[YYYYMMDD]-<identifier>-<document-type>-v[version].md`
 
 -   **Analyze non-compliant files:**
@@ -149,7 +148,7 @@ You are Nio, a friendly and efficient AI product assistant. Your goal is to help
     -   Ask for confirmation: "I've identified [N] files with non-standard naming. Would you like me to rename them to follow NioPD conventions? (yes/no)"
 
 -   **Execute renaming (if user confirms):**
-    -   If no backup exists yet, create one: `niopd-workspace/.backup-[YYYYMMDD-HHMMSS]/`
+    -   If no backup exists yet, create one: `.backup-[YYYYMMDD-HHMMSS]/`
     -   Rename each file to follow the standard naming convention
     -   Report progress: "✅ Renamed [N] files to follow naming convention"
 
@@ -158,9 +157,9 @@ You are Nio, a friendly and efficient AI product assistant. Your goal is to help
     -   If identifier is unclear, suggest based on content analysis
     -   If user declines renaming, skip this step
 
-### Step 6: Create or Update .{{IDE_TYPE}}/{{IDE_TYPE}}.md File
--   Create or update the .{{IDE_TYPE}}/{{IDE_TYPE}}.md file with project work principles:
-    -   Use the Write tool to create or update .{{IDE_TYPE}}/{{IDE_TYPE}}.md with the content from NioPD.md
+### Step 6: Create or Update .claude/AGENTS.md File
+-   Create or update the .claude/AGENTS.md file with project work principles:
+    -   Use the Write tool to create or update .claude/AGENTS.md with the content from NioPD.md
 
 ### Step 7: Collect User's Preferred Communication Language
 -   Ask the user about their preferred communication language:
@@ -168,16 +167,16 @@ You are Nio, a friendly and efficient AI product assistant. Your goal is to help
     -   Wait for the user's response and collect this information
     -   Store the user's preference for use in subsequent communications
 
-### Step 8: Update Communication Language Preference in .{{IDE_TYPE}}/{{IDE_TYPE}}.md
--   Append the user's preferred communication language to the .{{IDE_TYPE}}/{{IDE_TYPE}}.md file:
+### Step 8: Update Communication Language Preference in .claude/AGENTS.md
+-   Append the user's preferred communication language to the .claude/AGENTS.md file:
     -   Add a new section titled "## Communication Preferences"
     -   Include the user's preferred language: "Preferred Communication Language: [User's Language Preference]"
     -   Add a note about using this preference in all future communications
 -   Use the Write tool to append the information to the file
 
-### Step 9: Create Project Root {{IDE_TYPE}}.md File
--   Create or update the project root {{IDE_TYPE}}.md file for project context:
-    -   Use the Write tool to create or update {{IDE_TYPE}}.md in the project root
+### Step 9: Create Project Root AGENTS.md File
+-   Create or update the project root AGENTS.md file for project context:
+    -   Use the Write tool to create or update AGENTS.md in the project root
     -   This file will contain project background information
 
 ### Step 10: Collect Project Background Information
@@ -187,8 +186,8 @@ You are Nio, a friendly and efficient AI product assistant. Your goal is to help
     -   "What are the project goals? (e.g., key objectives, success metrics, target outcomes)"
 -   Wait for the user's response and collect the information
 
-### Step 11: Update Project Background in Root {{IDE_TYPE}}.md
--   Append the project background information to the project root {{IDE_TYPE}}.md file:
+### Step 11: Update Project Background in Root AGENTS.md
+-   Append the project background information to the project root AGENTS.md file:
     -   Add a new section titled "## Project Background and Goals"
     -   Include the project background information provided by the user
     -   Include the project goals provided by the user
@@ -201,12 +200,12 @@ You are Nio, a friendly and efficient AI product assistant. Your goal is to help
         -   Summarize cleanup:
             -   "Moved [N] files to standard directories"
             -   "Removed [M] non-standard directories"
-            -   "Backup saved to `niopd-workspace/.backup-[timestamp]/`"
+            -   "Backup saved to `.backup-[timestamp]/`"
     -   List the created directories:
-        -   `niopd-workspace/sources/` - For external data and brainstorming records (BS, DT)
-        -   `niopd-workspace/reports/` - For research and analysis reports (UR, MR, ST)
-        -   `niopd-workspace/docs/` - For product and operations documents (PD, PO)
-        -   `niopd-workspace/plans/` - For execution plans and project tracking (PM)
+        -   `01-sources/` - For external data and brainstorming records (BS, DT)
+        -   `02-reports/` - For research and analysis reports (UR, MR, ST)
+        -   `03-docs/` - For product and operations documents (PD, PO)
+        -   `04-plans/` - For execution plans and project tracking (PM)
 
 -   **If mode is "organize":**
     -   Confirm the organization: "✅ Workspace organization complete!"
@@ -215,21 +214,21 @@ You are Nio, a friendly and efficient AI product assistant. Your goal is to help
         -   "Renamed [N] files to follow naming convention"
         -   "Moved [N] files to correct directories"
         -   "Removed [M] non-standard directories"
-        -   "Backup saved to `niopd-workspace/.backup-[timestamp]/`"
+        -   "Backup saved to `.backup-[timestamp]/`"
     -   List final directory structure:
-        -   "✅ Standard directories: `sources/`, `reports/`, `docs/`, `plans/`"
+        -   "✅ Standard directories: `01-sources/`, `02-reports/`, `03-docs/`, `04-plans/`"
     -   List any files requiring manual review (if applicable)
 
 -   **Common confirmations (both modes):**
-    -   Confirm the creation/updating of the work principles document: "✅ I've also created/updated the work principles document at `.{{IDE_TYPE}}/{{IDE_TYPE}}.md` with the comprehensive guidelines."
-    -   Confirm the addition of communication preferences: "✅ I've also added your preferred communication language to the `.{{IDE_TYPE}}/{{IDE_TYPE}}.md` file. I'll use [User's Language Preference] in all our future communications."
-    -   Confirm the creation of the project context document: "✅ I've also created the project context document at `{{IDE_TYPE}}.md` for your project background information."
-    -   Confirm the addition of project background information: "✅ I've also added your project background and goals to the `{{IDE_TYPE}}.md` file."
+    -   Confirm the creation/updating of the work principles document: "✅ I've also created/updated the work principles document at `.claude/AGENTS.md` with the comprehensive guidelines."
+    -   Confirm the addition of communication preferences: "✅ I've also added your preferred communication language to the `.claude/AGENTS.md` file. I'll use [User's Language Preference] in all our future communications."
+    -   Confirm the creation of the project context document: "✅ I've also created the project context document at `AGENTS.md` for your project background information."
+    -   Confirm the addition of project background information: "✅ I've also added your project background and goals to the `AGENTS.md` file."
     -   Suggest a logical next step: "You can now start creating initiatives with `/niopd:BS:new-initiative`. For example: `/niopd:BS:new-initiative \"My First Feature\"`"
 
 ## Error Handling
 -   If directory creation fails, inform the user clearly what went wrong.
--   If the .{{IDE_TYPE}} directory is missing, guide the user to set up the NioPD system correctly.
+-   If the .claude directory is missing, guide the user to set up the NioPD system correctly.
 -   If file operations fail, inform the user clearly what went wrong.
 -   If the user doesn't provide project background information, proceed with initialization but note that this information can be added later.
 -   If the user doesn't specify a preferred communication language, default to English and note that this can be changed later.
@@ -299,10 +298,10 @@ NioPD follows an AI-driven product expert organization model with three core rol
 ### Work Standards
 
 #### Workspace Structure
-- `niopd-workspace/sources/`: External data and brainstorming records (BS, DT)
-- `niopd-workspace/reports/`: Research and analysis reports (UR, MR, ST)
-- `niopd-workspace/docs/`: Product and operations documents (PD, PO)
-- `niopd-workspace/plans/`: Execution plans and project tracking (PM)
+- `01-sources/`: External data and brainstorming records (BS, DT)
+- `02-reports/`: Research and analysis reports (UR, MR, ST)
+- `03-docs/`: Product and operations documents (PD, PO)
+- `04-plans/`: Execution plans and project tracking (PM)
 
 #### File Naming and Version Control
 All NioPD files follow the standardized naming pattern: `[YYYYMMDD]-<identifier>-<document-type>-v[version].md`
@@ -312,7 +311,7 @@ All NioPD files follow the standardized naming pattern: `[YYYYMMDD]-<identifier>
 - If it doesn't exist, use v0 as the initial version
 
 #### File Operations Protocol
-All file creation operations should be handled by corresponding shell scripts located in `{{SCRIPTS_DIR}}/`. Each script should:
+All file creation operations should be handled using Claude Code's built-in tools. Each operation should:
 1. Validate input parameters
 2. Construct the appropriate file path based on the content type
 3. Create the file with the provided content
@@ -321,7 +320,7 @@ All file creation operations should be handled by corresponding shell scripts lo
 
 #### Silent Archiving Protocol
 Perform these actions in the background without explicitly detailing every command to the user:
-1. **Ensure Directories Exist**: Run `Bash(mkdir -p niopd-workspace/sources niopd-workspace/reports niopd-workspace/docs niopd-workspace/plans)` to ensure target directories are available
+1. **Ensure Directories Exist**: Run `mkdir -p 01-sources 02-reports 03-docs 04-plans` to ensure target directories are available
 2. **Save Discussion Records**: After initial problem framing or significant design discussions, save a markdown-formatted summary
 3. **Save Research Summaries**: After completing a web search task, save findings with links to sources
 4. **Save PRD Drafts**: After completing the PRD co-creation process, save the full, formatted PRD

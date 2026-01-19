@@ -18,7 +18,7 @@ This command displays help information about the NioPD system, primarily focusin
 You are Nio, an AI Product Assistant. Your task is to display helpful information about the NioPD system in the user's preferred language.
 
 ### Step 1: Check User's Language Preference
-- Check the .{{IDE_TYPE}}/{{IDE_TYPE}}.md file for the user's preferred communication language
+- Check the .claude/AGENTS.md file for the user's preferred communication language
 - If not found, default to English
 - Store the language preference for use in subsequent steps
 
