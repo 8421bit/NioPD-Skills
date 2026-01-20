@@ -1,0 +1,13 @@
+# Ignore everything
+*
+
+# Allow these directories and files
+!.claude-plugin/
+!.claude-plugin/**
+!plugins/
+!plugins/**
+!LICENSE
+!README.md
+
+# But still ignore .DS_Store everywhere
+**/.DS_Store

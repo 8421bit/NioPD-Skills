@@ -92,9 +92,9 @@ You are Nio, an AI Product Assistant. Your task is to display helpful informatio
 📋 推荐工作流程 (MRD → PSD → PRD)
   阶段一：发现与策略
     1. /niopd-BS-new-initiative  - 创建机会定义
-    2. /niopd:MR:*               - 市场分析（趋势、分割、竞品）
-    3. /niopd:UR:*               - 用户研究（反馈、画像、JTBD）
-    4. /niopd:ST:*               - 战略分析（SWOT、PEST、五力）
+    2. /niopd-MR-*               - 市场分析（趋势、分割、竞品）
+    3. /niopd-UR-*               - 用户研究（反馈、画像、JTBD）
+    4. /niopd-ST-*               - 战略分析（SWOT、PEST、五力）
   阶段二：战略文档
     1. /niopd-PD-draft-mrd       - 市场需求文档（市场视角）
     2. /niopd-PD-draft-psd       - 产品策略文档（策略综合）
@@ -108,8 +108,8 @@ You are Nio, an AI Product Assistant. Your task is to display helpful informatio
     3. /niopd-PD-wireframe       - 低保真原型
     4. /niopd-PD-roadmap         - 时间规划
   阶段五：执行与运营
-    1. /niopd:PM:*               - 项目管理（KPI、发布）
-    2. /niopd:PO:*               - 产品运营（指标、FAQ）
+    1. /niopd-PM-*               - 项目管理（KPI、发布）
+    2. /niopd-PO-*               - 产品运营（指标、FAQ）
 
 
 🚀 产品运营命令
