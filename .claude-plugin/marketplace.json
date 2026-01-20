@@ -1,5 +1,5 @@
 {
-  "name": "niopd-marketplace",
+  "name": "niopd-skills",
   "owner": {
     "name": "8421bit",
     "url": "https://github.com/8421bit"
@@ -12,7 +12,7 @@
   "plugins": [
     {
       "name": "niopd",
-      "source": "./../plugins/niopd/",
+      "source": "./plugins/niopd/",
       "description": "NioPD (Nio Product Development) - A comprehensive product management toolkit for Claude Code that helps product managers discover, define, and deliver great products through AI-powered workflows.",
       "version": "1.0.0",
       "category": "productivity",
@@ -28,8 +28,8 @@
       }
     },
     {
-      "name": "output-style-niopd",
-      "source": "./../plugins/output-style-niopd/",
+      "name": "niopd-output-style",
+      "source": "./plugins/niopd-output-style/",
       "description": "NioPD Output Style - Provides context and persona for the NioPD product management assistant through SessionStart hook",
       "version": "1.0.0",
       "category": "productivity",

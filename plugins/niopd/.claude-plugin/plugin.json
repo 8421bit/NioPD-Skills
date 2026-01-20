@@ -1,14 +1,19 @@
 {
   "name": "niopd",
-  "version": "1.0.0",
-  "description": "NioPD (Nio Product Development) - A comprehensive product management toolkit for Claude Code that helps product managers discover, define, and deliver great products through AI-powered workflows.",
+  "version": "2.0.0",
+  "description": "NioPD (Nio Product Director) - An AI-powered product management toolkit with 58 Skills and 13 Commands for Claude Code.",
   "author": {
     "name": "8421bit",
-    "email": "[email protected]"
+    "url": "https://github.com/8421bit"
   },
   "homepage": "https://github.com/iflow-ai/niopd#readme",
   "repository": "https://github.com/iflow-ai/niopd",
   "license": "MIT",
-  "keywords": ["product-management", "ai", "product-development", "pm-tools", "requirements", "roadmap"],
-  "commands": ["./commands/"]
+  "keywords": [
+    "product-management",
+    "ai",
+    "skills",
+    "requirements",
+    "roadmap"
+  ]
 }
