@@ -1,4 +1,4 @@
-# NioPD
+# NioPD-Skills
 
 Agent Skills for AI-powered Product Management with Claude Code.
 
