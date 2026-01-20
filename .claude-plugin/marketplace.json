@@ -28,8 +28,8 @@
       }
     },
     {
-      "name": "output-style-niopd",
-      "source": "./plugins/output-style-niopd/",
+      "name": "niopd-output-style",
+      "source": "./plugins/niopd-output-style/",
       "description": "NioPD Output Style - Provides context and persona for the NioPD product management assistant through SessionStart hook",
       "version": "1.0.0",
       "category": "productivity",

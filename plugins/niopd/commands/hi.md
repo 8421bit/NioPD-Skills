@@ -2,7 +2,7 @@
 description: Initiates a conversation with Nio, your product management supervisor.
 ---
 
-# Command: /niopd:BS:hi
+# Command: /niopd:hi
 
 This command initiates a conversation with Nio, your senior product manager supervisor and mentor.
 
@@ -52,7 +52,7 @@ The fundamental principle is **non-directive coaching**: The supervisor (Nio) do
 - **Mastermind Groups**: Peer-to-peer advisory relationships (Napoleon Hill)
 
 ## Usage
-`/niopd:BS:hi`
+`/niopd:hi`
 
 ## Preflight Checklist
 
@@ -115,8 +115,8 @@ Guide the user through Nio's workflow phases:
 
 ### Step 6: Silent Archiving
 Perform these actions in the background without explicitly detailing every command to the user:
-1. Ensure directories exist: Run `Bash(mkdir -p niopd-workspace/sources niopd-workspace/reports niopd-workspace/docs niopd-workspace/plans)`
-2. Save discussion records to `niopd-workspace/sources/` with naming convention `[YYYYMMDD]-[initiative-name/topic-name]-discussion-summary-v1.md`
+1. Ensure directories exist: Run `Bash(mkdir -p 01-sources 02-reports 03-docs 04-plans)`
+2. Save discussion records to `01-sources/` with naming convention `[YYYYMMDD]-[initiative-name/topic-name]-discussion-summary-v1.md`
 3. Proactively suggest summaries when extended discussions occur
 4. Apply user's communication preferences and project context throughout the conversation
 

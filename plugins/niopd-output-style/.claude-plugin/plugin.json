@@ -1,13 +1,18 @@
 {
-  "name": "output-style-niopd",
+  "name": "niopd-output-style",
   "version": "1.0.0",
   "description": "NioPD Output Style - Provides context and persona for the NioPD product management assistant",
   "author": {
     "name": "8421bit",
-    "email": "[email protected]"
+    "email": "abcute.studio@gmail.com"
   },
   "homepage": "https://github.com/iflow-ai/niopd",
   "repository": "https://github.com/iflow-ai/niopd",
   "license": "MIT",
-  "keywords": ["output-style", "product-management", "niopd", "context"]
+  "keywords": [
+    "output-style",
+    "product-management",
+    "niopd",
+    "niopd-output-style"
+  ]
 }

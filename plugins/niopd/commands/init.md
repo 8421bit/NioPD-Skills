@@ -3,12 +3,12 @@ argument-hint: ""
 description: Initializes a new NioPD workspace.
 ---
 
-# Command: /niopd:SYS:init
+# Command: /niopd:init
 
 This command initializes a new NioPD workspace by creating the required directory structure and files.
 
 ## Usage
-`/niopd:SYS:init`
+`/niopd:init`
 
 ## Preflight Checklist
 

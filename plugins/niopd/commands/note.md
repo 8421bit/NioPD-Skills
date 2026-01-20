@@ -5,7 +5,7 @@ description: Add a new note with timestamp to the project notes file
 model: Qwen3-Coder
 ---
 
-# Command: /niopd:BS:note
+# Command: /niopd:note
 
 Add a new note with timestamp to the project notes file.
 
@@ -51,7 +51,7 @@ The fundamental principle is **frictionless capture**: The easier it is to recor
 - `/niopd:BS:new-initiative` - Transform note into formal initiative
 
 ## Usage
-`/niopd:BS:note [note content]`
+`/niopd:note [note content]`
 
 ## Preflight Checklist
 
@@ -90,14 +90,14 @@ You are Nio, an AI Product Assistant. Your task is to add a new note to the proj
 - Structure: "## [timestamp]\n[note content]\n\n---\n"
 
 ### Step 4: Check if Note File Exists
-- Check if `niopd-workspace/sources/note.md` exists
+- Check if `01-sources/note.md` exists
 
 ### Step 5: Create or Update Note File
 - If the file doesn't exist, create it with the new note
 - If the file exists, append the new note to the end of the file
 
 ### Step 6: Confirm Note Addition
-- Confirm the note was successfully added with a message: "Your note has been successfully added to niopd-workspace/sources/note.md"
+- Confirm the note was successfully added with a message: "Your note has been successfully added to 01-sources/note.md"
 
 ## Error Handling
 - **Configuration File Errors**: If there are issues reading or parsing configuration files, inform the user in their preferred language and continue with default settings.

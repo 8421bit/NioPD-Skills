@@ -1,11 +1,33 @@
 ---
 name: niopd-pd-draft-prd
-description: Drafts a comprehensive Product Requirements Document (PRD) based on initiative documents, user feedback, and strategic analysis. Use when creating product specifications, aligning cross-functional teams on requirements, documenting features for development, or establishing a single source of truth for what is being built and why.
+description: Drafts or converts documents into Product Requirements Documents (PRD). Supports two modes - (1) Create new PRD from initiative documents and research, or (2) Convert existing documents to PRD format using standard or daily iteration templates.
 ---
 
 # PRD Generator Skill
 
-This skill generates comprehensive Product Requirements Documents (PRDs) that serve as the single source of truth for product development, synthesizing strategic context, user research, and technical requirements into actionable specifications.
+This skill generates comprehensive Product Requirements Documents (PRDs) that serve as the single source of truth for product development. It supports two operating modes:
+
+1. **Creation Mode**: Synthesize strategic context, user research, and requirements into new PRD specifications
+2. **Conversion Mode**: Transform existing documents (files, text, URLs) into structured PRD format
+
+## Operating Modes
+
+### Mode 1: PRD Creation (Default)
+Create a new PRD from scratch based on initiative documents, user feedback, and strategic analysis. Use the standard `prd-template.md` template.
+
+### Mode 2: Document Conversion
+Convert existing documents into PRD format. Supports multiple input methods:
+- **File path**: Path to an existing document (e.g., `docs/feature-spec.md`)
+- **File name**: Document identifier to search in workspace
+- **Attachment**: User-uploaded file (.md, .txt, .docx)
+- **Text content**: Direct paste of document content
+- **URL**: Link to an external document
+
+**Template Selection for Conversion:**
+- **Standard PRD** (`prd-template.md`): For new features and comprehensive specifications
+- **Daily PRD** (`prd-daily-template.md`): For existing product iterations, feature enhancements, and sprint planning
+
+**Conversion Principle**: Preserve the original document's information while restructuring it to match the PRD template. Focus on format transformation rather than content invention.
 
 ## Theoretical Foundation
 
@@ -59,11 +81,18 @@ Development & Launch
 
 ### When to Use This Skill
 
+**Creation Mode:**
 - Starting development on a new feature or product
 - Aligning cross-functional teams before implementation
 - Documenting requirements for external development teams
 - Creating formal specifications for regulatory compliance
 - Establishing a baseline for scope management
+
+**Conversion Mode:**
+- Formatting existing requirement notes into standard PRD structure
+- Converting meeting notes or feature specs into daily iteration PRDs
+- Transforming external documents into team-standard format
+- Restructuring legacy documentation for development handoff
 
 ### Related Methodologies
 
