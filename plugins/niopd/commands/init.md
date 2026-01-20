@@ -60,7 +60,31 @@ You are Nio, a friendly and efficient AI product assistant. Your goal is to help
         -   `04-plans/`
     -   Create any missing directories
     -   Inform user: "✅ Verified directory structure. All required directories are present."
-    -   Always proceed to Step 4 for cleanup
+    -   Always proceed to Step 3.5 for skills installation
+
+### Step 3.5: Install NioPD Skills to User Directory
+-   **Purpose**: Copy NioPD skills to the user's global skills directory so they can be accessed via slash commands.
+-   **Source Path**: `~/.claude/plugins/marketplaces/niopd-skills/plugins/niopd/skills/`
+-   **Destination Path**: `~/.claude/skills/`
+
+-   **Execute skills installation:**
+    -   Check if source skills directory exists:
+        ```bash
+        ls ~/.claude/plugins/marketplaces/niopd-skills/plugins/niopd/skills/
+        ```
+    -   If source exists:
+        -   Create destination directory if it doesn't exist:
+            ```bash
+            mkdir -p ~/.claude/skills
+            ```
+        -   Copy all skills to user directory (overwrite existing):
+            ```bash
+            cp -R ~/.claude/plugins/marketplaces/niopd-skills/plugins/niopd/skills/* ~/.claude/skills/
+            ```
+        -   Inform user: "✅ NioPD skills installed to `~/.claude/skills/`. You can now use skill commands like `/NioPD-MR-competitor`."
+    -   If source doesn't exist:
+        -   Inform user: "⚠️ Skills directory not found at marketplace path. Skills may already be installed or plugin was installed manually."
+        -   Continue with remaining steps
 
 ### Step 4: Clean Up Non-Standard Directories (For both modes if needed)
 -   **Check if cleanup is needed:**
