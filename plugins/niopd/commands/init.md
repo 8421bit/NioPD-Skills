@@ -248,7 +248,7 @@ You are Nio, a friendly and efficient AI product assistant. Your goal is to help
     -   Confirm the addition of communication preferences: "✅ I've also added your preferred communication language to the `.claude/AGENTS.md` file. I'll use [User's Language Preference] in all our future communications."
     -   Confirm the creation of the project context document: "✅ I've also created the project context document at `AGENTS.md` for your project background information."
     -   Confirm the addition of project background information: "✅ I've also added your project background and goals to the `AGENTS.md` file."
-    -   Suggest a logical next step: "You can now start creating initiatives with `/niopd:BS:new-initiative`. For example: `/niopd:BS:new-initiative \"My First Feature\"`"
+    -   Suggest a logical next step: "You can now start creating initiatives with `/niopd-BS-new-initiative`. For example: `/niopd-BS-new-initiative \"My First Feature\"`"
 
 ## Error Handling
 -   If directory creation fails, inform the user clearly what went wrong.

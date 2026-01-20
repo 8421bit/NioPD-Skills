@@ -46,9 +46,9 @@ The fundamental principle is **frictionless capture**: The easier it is to recor
 - **Meeting Minutes**: Structured documentation of discussions
 
 ### Complementary NioPD Commands
-- `/niopd:BS:feature-planning` - Analyze notes for feature opportunities
-- `/niopd:BS:hi` - Explore note ideas through conversation with Nio
-- `/niopd:BS:new-initiative` - Transform note into formal initiative
+- `/niopd-BS-feature-planning` - Analyze notes for feature opportunities
+- `/niopd-BS-hi` - Explore note ideas through conversation with Nio
+- `/niopd-BS-new-initiative` - Transform note into formal initiative
 
 ## Usage
 `/niopd:note [note content]`
